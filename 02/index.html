@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI의 이해: 당신이 몰랐던 AI 연대기</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700&display=swap');
+
+        :root {
+            --soft-pink: #fff0f5;
+            --soft-yellow: #fff9e6;
+            --main-gradient: linear-gradient(135deg, #fff5f7 0%, #fff9e6 100%);
+            --accent-color: #ffb7c5;
+        }
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background: var(--main-gradient);
+            color: #4a4a4a;
+            scroll-behavior: smooth;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 20px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(255, 183, 197, 0.2);
+        }
+
+        .hero-section {
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            width: 2px;
+            height: 100%;
+            background: var(--accent-color);
+            transform: translateX(-50%);
+            z-index: 0;
+        }
+
+        @media (max-width: 768px) {
+            .timeline-line { left: 20px; }
+        }
+
+        .quiz-option {
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .quiz-option:hover {
+            background: #fff0f5;
+        }
+
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 5px;
+            background: var(--accent-color);
+            z-index: 1000;
+            width: 0%;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1001;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal.active {
+            display: flex;
+            opacity: 1;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 10px;
+            box-shadow: 0 0 30px rgba(0,0,0,0.5);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+
+<!-- Navigation -->
+<nav class="fixed w-full z-50 px-6 py-4 flex justify-between items-center bg-white/30 backdrop-blur-md">
+    <div class="text-xl font-bold text-pink-400">AI Chronicle</div>
+    <div class="hidden md:flex space-x-8 font-medium">
+        <a href="#intro" class="hover:text-pink-400 transition">소개</a>
+        <a href="#history" class="hover:text-pink-400 transition">역사적 반전</a>
+        <a href="#tech" class="hover:text-pink-400 transition">핵심 기술</a>
+        <a href="#quiz" class="hover:text-pink-400 transition">체크 퀴즈</a>
+    </div>
+</nav>
+
+<!-- Hero Section -->
+<section id="intro" class="hero-section px-6">
+    <div class="floating mb-8 text-pink-300">
+        <i class="fa-solid fa-brain fa-5x"></i>
+    </div>
+    <h1 class="text-4xl md:text-6xl font-bold mb-6 text-gray-800 leading-tight">
+        알파고가 전부가 아니다:<br>
+        <span class="text-pink-400">AI 연대기의 5가지 반전</span>
+    </h1>
+    <p class="max-w-2xl text-lg text-gray-600 mb-10">
+        인공지능은 어느 날 갑자기 하늘에서 떨어진 혁명이 아닙니다.<br>
+        70년 전의 야망부터 혹독한 겨울을 견뎌낸 드라마틱한 역사를 만나보세요.
+    </p>
+    
+    <!-- 버튼 그룹 -->
+    <div class="flex flex-col sm:flex-row gap-4">
+        <a href="#history" class="bg-pink-400 text-white px-8 py-3 rounded-full font-bold hover:bg-pink-500 transition shadow-lg flex items-center justify-center">
+            <i class="fa-solid fa-rocket mr-2"></i> 여행 시작하기
+        </a>
+        <a href="AI_03_ppt.pdf" download="AI_03_ppt.pdf" class="bg-white border-2 border-pink-300 text-pink-400 px-8 py-3 rounded-full font-bold hover:bg-pink-50 transition shadow-lg flex items-center justify-center">
+            <i class="fa-solid fa-file-pdf mr-2"></i> 슬라이드 다운로드
+        </a>
+        <!-- 동영상보기 버튼 추가 -->
+        <a href="AI_01.mp4" target="_blank" class="bg-white border-2 border-blue-300 text-blue-400 px-8 py-3 rounded-full font-bold hover:bg-blue-50 transition shadow-lg flex items-center justify-center">
+            <i class="fa-solid fa-circle-play mr-2"></i> 동영상보기
+        </a>
+    </div>
+</section>
+
+<!-- Timeline Section -->
+<section id="history" class="py-20 px-6 relative overflow-hidden">
+    <h2 class="text-3xl font-bold text-center mb-6">AI 역사의 드라마틱한 순간들</h2>
+    
+    <!-- 인포그래픽 버튼 -->
+    <div class="flex justify-center mb-16">
+        <button onclick="openModal()" class="flex items-center space-x-2 bg-white border-2 border-pink-300 text-pink-500 px-6 py-2 rounded-full hover:bg-pink-50 transition font-bold shadow-sm">
+            <i class="fa-solid fa-image"></i>
+            <span>인포그래픽으로 한눈에 보기</span>
+        </button>
+    </div>
+    
+    <div class="max-w-5xl mx-auto relative">
+        <div class="timeline-line"></div>
+        
+        <!-- 반전 1 -->
+        <div class="relative mb-20 flex flex-col md:flex-row items-center">
+            <div class="md:w-1/2 md:pr-12 text-right hidden md:block">
+                <h3 class="text-xl font-bold text-pink-400 mb-2">1950 - 1956</h3>
+                <p class="text-gray-500">인공지능이라는 학문의 탄생</p>
+            </div>
+            <div class="z-10 bg-white border-4 border-pink-200 w-12 h-12 rounded-full flex items-center justify-center mb-4 md:mb-0">
+                <span class="text-pink-400 font-bold">1</span>
+            </div>
+            <div class="md:w-1/2 md:pl-12">
+                <div class="glass-card p-6">
+                    <h3 class="text-xl font-bold mb-3">시작은 70년 전 '게임'이었다</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        앨런 튜링의 '모방 게임(튜링 테스트)' 제안과 아서 사무엘의 체커 프로그램으로 시작되었습니다. 
+                        1956년 다트머스 컨퍼런스에서 드디어 '인공지능'이라는 명칭이 공식 채택되었죠.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 반전 2 -->
+        <div class="relative mb-20 flex flex-col md:flex-row items-center">
+            <div class="md:w-1/2 md:pr-12">
+                <div class="glass-card p-6 md:text-right">
+                    <h3 class="text-xl font-bold mb-3">혹독한 'AI 겨울'이 두 번이나</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        연산 능력 부족과 비관론으로 1970년대와 80년대 말, 투자가 끊기는 암흑기가 있었습니다. 
+                        하지만 이 시기에 '백프로파게이션(오차 역전파)' 알고리즘이 재발견되며 부활의 토대를 마련했습니다.
+                    </p>
+                </div>
+            </div>
+            <div class="z-10 bg-white border-4 border-pink-200 w-12 h-12 rounded-full flex items-center justify-center mb-4 md:mb-0">
+                <span class="text-pink-400 font-bold">2</span>
+            </div>
+            <div class="md:w-1/2 md:pl-12 hidden md:block">
+                <h3 class="text-xl font-bold text-pink-400 mb-2">1970 - 1993</h3>
+                <p class="text-gray-500">시련을 통한 성숙의 시기</p>
+            </div>
+        </div>
+
+        <!-- 반전 3 -->
+        <div class="relative mb-20 flex flex-col md:flex-row items-center">
+            <div class="md:w-1/2 md:pr-12 text-right hidden md:block">
+                <h3 class="text-xl font-bold text-pink-400 mb-2">1966</h3>
+                <p class="text-gray-500">인간은 기계에 마음을 열었다</p>
+            </div>
+            <div class="z-10 bg-white border-4 border-pink-200 w-12 h-12 rounded-full flex items-center justify-center mb-4 md:mb-0">
+                <span class="text-pink-400 font-bold">3</span>
+            </div>
+            <div class="md:w-1/2 md:pl-12">
+                <div class="glass-card p-6">
+                    <h3 class="text-xl font-bold mb-3">챗봇에 대한 집착은 60년대부터</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        최초의 상담형 챗봇 'ELIZA'는 단순한 프로그램이었음에도 사람들이 감정적으로 의존하는 '엘리자 효과'를 일으켰습니다. 
+                        인류의 대화형 AI 사랑은 생각보다 오래되었습니다.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 반전 4 -->
+        <div class="relative mb-20 flex flex-col md:flex-row items-center">
+            <div class="md:w-1/2 md:pr-12">
+                <div class="glass-card p-6 md:text-right">
+                    <h3 class="text-xl font-bold mb-3">데이터와 계산력의 만남</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        2012년 이미지넷 대회로 촉발된 딥러닝 혁명! 2017년 '트랜스포머' 아키텍처의 등장은 
+                        문맥을 통째로 이해하는 현대 거대 언어 모델(LLM)의 탄생으로 이어졌습니다.
+                    </p>
+                </div>
+            </div>
+            <div class="z-10 bg-white border-4 border-pink-200 w-12 h-12 rounded-full flex items-center justify-center mb-4 md:mb-0">
+                <span class="text-pink-400 font-bold">4</span>
+            </div>
+            <div class="md:w-1/2 md:pl-12 hidden md:block">
+                <h3 class="text-xl font-bold text-pink-400 mb-2">2012 - 현재</h3>
+                <p class="text-gray-500">폭발적인 딥러닝 혁명</p>
+            </div>
+        </div>
+
+        <!-- 반전 5 -->
+        <div class="relative flex flex-col md:flex-row items-center">
+            <div class="md:w-1/2 md:pr-12 text-right hidden md:block">
+                <h3 class="text-xl font-bold text-pink-400 mb-2">NEXT</h3>
+                <p class="text-gray-500">창조와 윤리의 공존</p>
+            </div>
+            <div class="z-10 bg-white border-4 border-pink-200 w-12 h-12 rounded-full flex items-center justify-center mb-4 md:mb-0">
+                <span class="text-pink-400 font-bold">5</span>
+            </div>
+            <div class="md:w-1/2 md:pl-12">
+                <div class="glass-card p-6">
+                    <h3 class="text-xl font-bold mb-3">창조를 넘어 '윤리'의 시대로</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        이제 AI는 인식을 넘어 콘텐츠를 '생성'합니다. 미드저니, HyperCLOVA X 같은 모델들이 활약하는 지금, 
+                        글로벌 규제 표준과 '사람 중심의 AI 윤리'가 무엇보다 중요해졌습니다.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Image Modal -->
+<div id="imageModal" class="modal" onclick="closeModal()">
+    <span class="close-modal">&times;</span>
+    <img class="modal-content" id="modalImg" src="AI_04_history.jpg" alt="인공지능의 역사 인포그래픽">
+</div>
+
+<!-- Technical Content Section -->
+<section id="tech" class="py-20 bg-white/50 px-6">
+    <div class="max-w-6xl mx-auto">
+        <h2 class="text-3xl font-bold text-center mb-16">한 눈에 보는 AI 핵심 원리</h2>
+        
+        <div class="grid md:grid-cols-2 gap-8 mb-16">
+            <!-- 전통적 vs AI -->
+            <div class="glass-card p-8">
+                <div class="text-pink-400 mb-4"><i class="fa-solid fa-code fa-2x"></i></div>
+                <h3 class="text-2xl font-bold mb-4">전통적 프로그래밍 vs AI</h3>
+                <ul class="space-y-4">
+                    <li class="flex items-start">
+                        <span class="bg-pink-100 text-pink-500 rounded-full p-1 mr-3 mt-1"><i class="fa-solid fa-check text-xs"></i></span>
+                        <div><strong>전통적:</strong> 사람이 규칙(IF-THEN)을 직접 명시함.</div>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="bg-pink-100 text-pink-500 rounded-full p-1 mr-3 mt-1"><i class="fa-solid fa-check text-xs"></i></span>
+                        <div><strong>AI:</strong> 대규모 데이터에서 스스로 패턴을 학습함.</div>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- 판별 vs 생성 -->
+            <div class="glass-card p-8">
+                <div class="text-pink-400 mb-4"><i class="fa-solid fa-wand-magic-sparkles fa-2x"></i></div>
+                <h3 class="text-2xl font-bold mb-4">판별 모델 vs 생성 모델</h3>
+                <ul class="space-y-4">
+                    <li class="flex items-start">
+                        <span class="bg-pink-100 text-pink-500 rounded-full p-1 mr-3 mt-1"><i class="fa-solid fa-check text-xs"></i></span>
+                        <div><strong>판별:</strong> "이 사진은 고양이인가?"를 분류함.</div>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="bg-pink-100 text-pink-500 rounded-full p-1 mr-3 mt-1"><i class="fa-solid fa-check text-xs"></i></span>
+                        <div><strong>생성:</strong> "고양이 사진을 새로 그려줘"를 수행함.</div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 국내 모델 홍보 영역 -->
+        <div class="glass-card p-10 bg-gradient-to-r from-pink-50 to-yellow-50">
+            <h3 class="text-2xl font-bold text-center mb-8">대한민국의 AI 자부심</h3>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-white/80 p-5 rounded-xl text-center">
+                    <h4 class="font-bold text-pink-400 text-lg mb-2">HyperCLOVA X</h4>
+                    <p class="text-sm text-gray-600">한국어 데이터 6,500배 학습, 국내 문화와 검색에 최적화</p>
+                </div>
+                <div class="bg-white/80 p-5 rounded-xl text-center">
+                    <h4 class="font-bold text-pink-400 text-lg mb-2">EXAONE 3.0</h4>
+                    <p class="text-sm text-gray-600">4,500만 건 이상의 전문 지식(논문 등) 학습, 의료 및 법률 정밀 지식</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Quiz Section -->
+<section id="quiz" class="py-20 px-6">
+    <div class="max-w-3xl mx-auto glass-card p-10">
+        <h2 class="text-3xl font-bold text-center mb-10">지식 체크 퀴즈</h2>
+        
+        <div id="quizContainer">
+            <div class="mb-8">
+                <p class="text-lg font-medium mb-4">Q1. 1950년 앨런 튜링이 제안한 기계의 지능 판별 기준은?</p>
+                <div class="space-y-3">
+                    <div class="quiz-option p-4 border rounded-xl" onclick="checkAnswer(this, false)">알파고 테스트</div>
+                    <div class="quiz-option p-4 border rounded-xl" onclick="checkAnswer(this, true)">튜링 테스트 (모방 게임)</div>
+                    <div class="quiz-option p-4 border rounded-xl" onclick="checkAnswer(this, false)">이미지넷 챌린지</div>
+                </div>
+            </div>
+
+            <div class="mb-8">
+                <p class="text-lg font-medium mb-4">Q2. 현대 거대 언어 모델(LLM)의 근간이 되는 핵심 아키텍처는?</p>
+                <div class="space-y-3">
+                    <div class="quiz-option p-4 border rounded-xl" onclick="checkAnswer(this, true)">트랜스포머 (Transformer)</div>
+                    <div class="quiz-option p-4 border rounded-xl" onclick="checkAnswer(this, false)">전문가 시스템 (Expert System)</div>
+                    <div class="quiz-option p-4 border rounded-xl" onclick="checkAnswer(this, false)">퍼셉트론 (Perceptron)</div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="resultMessage" class="hidden text-center p-6 bg-pink-100 rounded-xl text-pink-600 font-bold">
+            멋져요! AI의 핵심 내용을 완벽히 파악하셨네요!
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="py-10 text-center text-gray-500 text-sm border-t border-white/20">
+    <p>© 2024 AI Chronicle Guide. "인간의 통찰력과 AI의 연산력이 조화를 이루는 미래를 위하여"</p>
+</footer>
+
+<script>
+    // Progress Bar
+    window.onscroll = function() {
+        let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+        let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        let scrolled = (winScroll / height) * 100;
+        document.getElementById("progressBar").style.width = scrolled + "%";
+    };
+
+    // Modal Control
+    function openModal() {
+        const modal = document.getElementById('imageModal');
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden'; 
+    }
+
+    function closeModal() {
+        const modal = document.getElementById('imageModal');
+        modal.classList.remove('active');
+        document.body.style.overflow = 'auto'; 
+    }
+
+    // Quiz Logic
+    let correctCount = 0;
+    const totalQuestions = 2;
+
+    function checkAnswer(element, isCorrect) {
+        if (element.parentElement.classList.contains('answered')) return;
+
+        if (isCorrect) {
+            element.classList.add('bg-green-100', 'border-green-500', 'text-green-700');
+            correctCount++;
+        } else {
+            element.classList.add('bg-red-100', 'border-red-500', 'text-red-700');
+        }
+        
+        element.parentElement.classList.add('answered');
+
+        if (document.querySelectorAll('.answered').length === totalQuestions) {
+            document.getElementById('resultMessage').classList.remove('hidden');
+        }
+    }
+
+    // Scroll Animation Reveal
+    const observerOptions = {
+        threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('opacity-100', 'translate-y-0');
+                entry.target.classList.remove('opacity-0', 'translate-y-10');
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.glass-card').forEach(card => {
+        card.classList.add('transition', 'duration-700', 'opacity-0', 'translate-y-10');
+        observer.observe(card);
+    });
+</script>
+
+</body>
+</html>
