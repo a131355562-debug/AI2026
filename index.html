@@ -108,7 +108,6 @@
             z-index: 1000;
         }
 
-        /* Loading animation for image */
         @keyframes pulse {
             0%, 100% { opacity: 1; }
             50% { opacity: 0.5; }
@@ -161,19 +160,17 @@
             </div>
             
             <div class="glass-card p-10 md:p-16 rounded-[3rem] flex flex-col md:flex-row items-center gap-12">
-                <div class="w-48 h-48 md:w-64 md:h-64 rounded-[2.5rem] bg-slate-100 dark:bg-white/5 border dark:border-white/10 border-slate-200 overflow-hidden flex-shrink-0 relative group shadow-inner flex items-center justify-center">
+                <div class="w-48 h-48 md:w-64 md:h-64 rounded-[2.5rem] bg-slate-100 dark:bg-white/5 border dark:border-white/10 border-slate-200 overflow-hidden flex-shrink-0 relative group shadow-2xl flex items-center justify-center">
                     <div class="absolute inset-0 bg-gradient-to-tr from-accentBlue/20 to-accentPurple/20 opacity-0 group-hover:opacity-100 transition-opacity z-10"></div>
                     
-                    <!-- 이미지 로딩용 플레이스홀더 -->
                     <div id="profile-loading" class="absolute inset-0 flex items-center justify-center bg-slate-200 dark:bg-slate-800 loading-pulse">
-                        <span class="text-xs font-mono opacity-50">LOADING...</span>
+                        <span class="text-xs font-mono opacity-50 uppercase tracking-tighter">Processing Image...</span>
                     </div>
 
-                    <!-- 수정된 이미지 경로: 아티팩트 파일 시스템 경로 적용 -->
                     <img id="profile-img" 
-                         src="/artifacts/api/file/image_e4aebb.png" 
-                         onload="this.parentElement.querySelector('#profile-loading').style.display='none'; console.log('이미지 로드 성공: image_e4aebb.png')"
-                         onerror="this.style.display='none'; this.parentElement.querySelector('#profile-loading').style.display='none'; document.getElementById('profile-fallback').style.display='flex'; console.error('이미지 로드 실패: image_e4aebb.png')"
+                         src="/artifacts/api/file/image_da41b7.jpg" 
+                         onload="this.parentElement.querySelector('#profile-loading').style.display='none';"
+                         onerror="this.style.display='none'; this.parentElement.querySelector('#profile-loading').style.display='none'; document.getElementById('profile-fallback').style.display='flex';"
                          class="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-110" 
                          alt="양주한 프로필 이미지">
                     
@@ -218,6 +215,7 @@
         </div>
     </footer>
 
+    <!-- 상세보기 모달 -->
     <div id="modal" class="hidden fixed inset-0 bg-black/80 z-[100] backdrop-blur-md items-center justify-center p-4 overflow-y-auto" onclick="closeModal()">
         <div class="modal-content relative w-full max-w-3xl dark:bg-[#0a0a10] bg-white rounded-3xl p-8 md:p-12 shadow-2xl" onclick="event.stopPropagation()">
             <button class="absolute top-6 right-8 text-2xl dark:text-gray-400 text-slate-400 hover:text-blue-500 transition-colors" onclick="closeModal()">✕</button>
@@ -246,16 +244,66 @@
         }
 
         const projects = [
-            { id: 1, title: "AI의 이해", tools: ["NotebookLM", "Generative AI"], link: "./02/index.html", color: "#3B82F6", summary: "Google NotebookLM을 활용한 AI의 역사와 생성형 AI 원리 분석 리서치.", detail: "AI란 무엇인가? 앨런 튜링의 테스트부터 딥러닝의 폭발적인 성장까지 탐구했습니다. NotebookLM을 활용해 방대한 자료를 효율적으로 정제했습니다." },
-            { id: 2, title: "프롬프트 엔지니어링", tools: ["GPT-4", "Claude"], color: "#10B981", summary: "LLM의 응답 품질 극대화를 위한 구조적 질문 설계.", detail: "상황별 최적의 결과를 얻기 위한 퓨샷 러닝 및 페르소나 설정 기법을 익혔습니다." },
-            { id: 3, title: "생성형 이미지 워크플로우", tools: ["Midjourney", "Stable Diffusion"], color: "#F59E0B", summary: "컨셉 아트를 활용한 일관된 비주얼 스토리텔링.", detail: "일관성 있는 캐릭터와 배경 생성을 위한 컨트롤넷 활용 및 프롬프트 최적화 프로젝트입니다." },
-            { id: 4, title: "데이터 시각화 리포트", tools: ["Tableau", "Chart.js"], color: "#EC4899", summary: "복잡한 수치를 직관적인 인사이트로 변환.", detail: "공공 데이터를 분석하여 사회적 문제의 추이를 한눈에 파악할 수 있는 대시보드를 제작했습니다." },
-            { id: 5, title: "AI 기반 영상 제작", tools: ["Runway Gen-2", "Pika"], color: "#8B5CF6", summary: "텍스트 기반 동영상 생성 및 시네마틱 효과.", detail: "정적인 이미지를 기반으로 AI 애니메이션 기술을 적용하여 단편 필름을 완성했습니다." },
-            { id: 6, title: "챗봇 UX 시나리오", tools: ["Voiceflow", "Figma"], color: "#EF4444", summary: "사용자 경험을 고려한 대화형 인터페이스 설계.", detail: "고객 맞춤형 상담을 위한 챗봇의 트리 구조와 페르소나를 설계하고 프로토타이핑했습니다." },
-            { id: 7, title: "윤리적 AI 비평", tools: ["Notion", "Ethics"], color: "#06B6D4", summary: "AI 저작권 및 편향성에 대한 심도 있는 리서치.", detail: "인공지능의 발전 과정에서 발생하는 윤리적 문제와 해결 방안에 대한 비평 리포트입니다." },
-            { id: 8, title: "머신러닝 기초 모델링", tools: ["Teachable Machine"], color: "#6366F1", summary: "이미지 분류를 통한 실생활 문제 해결 모델 구축.", detail: "실제 사물 인식을 통해 생활 편의를 돕는 간단한 머신러닝 모델을 제작하고 테스트했습니다." },
-            { id: 9, title: "AI 사운드 디자인", tools: ["Suno AI", "Adobe Audition"], color: "#14B8A6", summary: "테마에 어울리는 생성형 음악 및 효과음 삽입.", detail: "영상 프로젝트에 필요한 배경 음악을 AI로 작곡하고 믹싱하여 전문적인 사운드를 연출했습니다." },
-            { id: 10, title: "파이널 포트폴리오", tools: ["HTML5", "Tailwind"], color: "#F43F5E", summary: "모든 과업을 집대성한 인터랙티브 웹 포트폴리오.", detail: "한 학기 동안 학습한 모든 AI 기술을 활용하여 자신만의 정체성을 담은 결과물을 웹으로 배포했습니다." }
+            { 
+                id: 1, 
+                title: "AI의 이해", 
+                tools: ["NotebookLM", "Generative AI", "Research"], 
+                link: "./02/index.html", 
+                color: "#3B82F6", 
+                summary: "Google NotebookLM을 활용하여 AI의 정의, 역사 및 핵심 원리를 리서치했습니다.", 
+                detail: `
+                    <div class='space-y-6'>
+                        <section>
+                            <h5 class='text-lg font-bold mb-2 text-blue-400'>구글 NotebookLM 활용 사례</h5>
+                            <p class='text-sm opacity-80'>방대한 분량의 AI 관련 논문과 기술 문서를 NotebookLM에 학습시켜, 복잡한 개념들을 구조화하고 핵심 질문에 대한 답변을 생성하는 워크플로우를 구축했습니다.</p>
+                        </section>
+                        <section>
+                            <h5 class='text-lg font-bold mb-2 text-blue-400'>AI란 무엇인가?</h5>
+                            <p class='text-sm opacity-80'>인간의 지적 능력을 컴퓨터로 구현하는 기술의 본질을 탐구하고, 약인공지능(ANI)과 강인공지능(AGI)의 차이점을 정의했습니다.</p>
+                        </section>
+                        <section>
+                            <h5 class='text-lg font-bold mb-2 text-blue-400'>인공지능의 역사</h5>
+                            <p class='text-sm opacity-80'>1950년대 다트머스 회의부터 'AI의 겨울'을 거쳐 현재의 딥러닝 혁명에 이르기까지, 인공지능 발전의 주요 변곡점을 연대기 순으로 정리했습니다.</p>
+                        </section>
+                        <section>
+                            <h5 class='text-lg font-bold mb-2 text-blue-400'>생성형 AI (Generative AI)</h5>
+                            <p class='text-sm opacity-80'>Transformer 아키텍처와 확산 모델(Diffusion Model)을 기반으로 텍스트, 이미지, 영상을 생성하는 현대 생성형 AI의 작동 원리를 분석했습니다.</p>
+                        </section>
+                        <div class="pt-6">
+                            <a href="./02/index.html" class="inline-block px-6 py-2 rounded-xl bg-blue-500 text-white font-bold hover:bg-blue-600 transition-colors">결과물 바로보기</a>
+                        </div>
+                    </div>
+                `
+            },
+            { 
+                id: 2, 
+                title: "데이터 스토리텔링", 
+                tools: ["Gemini 스토리북"], 
+                link: "./03/index.html",
+                color: "#10B981", 
+                summary: "공공 데이터를 분석하고 인사이트를 도출하여 시각적으로 설득력 있는 리포트 작성하여 스토리북으로 만들기.", 
+                detail: `
+                    <div class='space-y-6'>
+                        <section>
+                            <h5 class='text-lg font-bold mb-2 text-emerald-400'>데이터 인사이트 도출</h5>
+                            <p class='text-sm opacity-80'>복잡한 공공 데이터를 분석하여 핵심 인사이트를 추출하고, 이를 Gemini를 활용해 흥미로운 서사 구조로 변환했습니다.</p>
+                        </section>
+                        <section>
+                            <h5 class='text-lg font-bold mb-2 text-emerald-400'>스토리북 제작 워크플로우</h5>
+                            <p class='text-sm opacity-80'>단순한 차트 나열을 넘어, 데이터가 가진 의미를 하나의 시각적 이야기로 구성하는 스토리텔링 기법을 적용했습니다.</p>
+                        </section>
+                        <div class="pt-6">
+                            <a href="./03/index.html" class="inline-block px-6 py-2 rounded-xl bg-emerald-500 text-white font-bold hover:bg-emerald-600 transition-colors">결과물 바로보기</a>
+                        </div>
+                    </div>
+                `
+            },
+            { id: 3, title: "생성형 이미지 워크플로우", tools: ["Midjourney", "Stable Diffusion"], color: "#F59E0B", summary: "컨셉 아트를 활용한 비주얼 스토리텔링.", detail: "일관성 있는 캐릭터와 배경 생성을 위한 컨트롤넷 활용 기법을 연구했습니다." },
+            { id: 4, title: "데이터 시각화 리포트", tools: ["Tableau", "Chart.js"], color: "#EC4899", summary: "복잡한 수치를 직관적인 인사이트로 변환.", detail: "공공 데이터를 분석하여 시각적 대시보드를 제작했습니다." },
+            { id: 5, title: "AI 기반 영상 제작", tools: ["Runway Gen-2", "Pika"], color: "#8B5CF6", summary: "텍스트 기반 동영상 생성 및 시네마틱 효과.", detail: "AI 애니메이션 기술을 적용하여 단편 필름을 완성했습니다." },
+            { id: 6, title: "챗봇 UX 시나리오", tools: ["Voiceflow", "Figma"], color: "#EF4444", summary: "사용자 경험을 고려한 대화형 인터페이스 설계.", detail: "고객 맞춤형 상담을 위한 챗봇의 트리 구조를 설계했습니다." },
+            { id: 7, title: "윤리적 AI 비평", tools: ["Notion", "Ethics"], color: "#06B6D4", summary: "AI 저작권 및 편향성에 대한 심도 있는 리서치.", detail: "인공지능의 발전 과정에서 발생하는 윤리적 문제와 해결 방안을 고찰했습니다." },
+            { id: 10, title: "파이널 포트폴리오", tools: ["HTML5", "Tailwind"], color: "#F43F5E", summary: "모든 과업을 집대성한 웹 포트폴리오.", detail: "학습한 모든 AI 기술을 활용하여 자신만의 정체성을 담은 결과물을 구축했습니다." }
         ];
 
         const cardGrid = document.getElementById('card-grid');
@@ -264,7 +312,9 @@
             card.className = `glass-card p-8 pt-10 rounded-3xl cursor-pointer reveal group`;
             card.style.setProperty('--accent-color', p.color);
             card.style.transitionDelay = `${(index % 3) * 0.1}s`;
+            
             card.onclick = () => openModal(p);
+
             card.innerHTML = `
                 <div class="card-accent-bar"></div>
                 <div class="text-xs font-mono mb-4 tracking-widest uppercase" style="color: ${p.color}">Task ${String(p.id).padStart(2, '0')}</div>
@@ -274,10 +324,16 @@
                 </div>
                 <p class="dark:text-gray-400 text-slate-500 text-sm leading-relaxed">${p.summary}</p>
                 <div class="mt-8 flex items-center justify-between">
-                    <div class="text-xs font-semibold opacity-70 group-hover:opacity-100 transition-opacity" style="color: ${p.color}">LEARN MORE</div>
-                    <div class="w-8 h-8 rounded-full border border-current flex items-center justify-center opacity-40 group-hover:opacity-100 transition-all group-hover:bg-current group-hover:text-white" style="color: ${p.color}">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"/></svg>
-                    </div>
+                    <div class="text-xs font-semibold opacity-70 group-hover:opacity-100 transition-opacity" style="color: ${p.color}">DETAILS</div>
+                    
+                    <a href="${p.link ? p.link : '#'}" 
+                       class="w-10 h-10 rounded-full border border-current flex items-center justify-center opacity-40 group-hover:opacity-100 transition-all hover:bg-current hover:text-white" 
+                       style="color: ${p.color}"
+                       onclick="event.stopPropagation();">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"/>
+                        </svg>
+                    </a>
                 </div>
             `;
             cardGrid.appendChild(card);
@@ -292,12 +348,6 @@
                             <span class="font-mono text-sm" style="color: ${project.color}">Task ${project.id}</span>
                             <h2 class="text-3xl md:text-4xl font-bold mt-2 mb-4 dark:text-white text-slate-800">${project.title}</h2>
                         </div>
-                        ${project.link ? `
-                            <a href="${project.link}" class="hidden md:flex items-center gap-2 px-6 py-3 rounded-xl text-white font-bold transition-transform hover:scale-105" style="background-color: ${project.color}">
-                                결과물 보기
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-                            </a>
-                        ` : ''}
                     </div>
                     <div class="space-y-4">
                         <h4 class="text-xl font-semibold dark:text-white text-slate-800">상세 설명</h4>
