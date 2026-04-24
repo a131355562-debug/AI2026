@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Journey & Vision - 양주한</title>
+    <!-- Google Fonts: Noto Sans KR -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --bg-color: #F4F7F6;
+            --accent-color: #E0E7FF;
+            --text-color: #4A5568;
+            --indigo-600: #4f46e5;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Noto Sans KR', sans-serif;
+            scroll-behavior: smooth;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Home Button Style */
+        .home-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background-color: var(--accent-color);
+            color: var(--text-color);
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-weight: 700;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .home-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+            background-color: #d1daff;
+        }
+
+        /* Fade-in Animation on Scroll */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 6rem 2rem;
+            text-align: center;
+        }
+
+        .section-label {
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            color: #818cf8;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 4px;
+            background-color: var(--accent-color);
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+
+        .card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 1.5rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+            max-width: 900px;
+            width: 100%;
+        }
+
+        .accent-box {
+            background-color: var(--accent-color);
+            display: inline-block;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            width: 100%;
+            background-color: #edf2f7;
+            border-radius: 10px;
+            margin: 0.5rem 0;
+        }
+
+        .progress-bar {
+            height: 12px;
+            background-color: #818cf8;
+            border-radius: 10px;
+            width: 0;
+            transition: width 1.5s ease-in-out;
+        }
+
+        .nav-dots {
+            position: fixed;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            z-index: 100;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            background-color: #cbd5e0;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .dot.active {
+            background-color: #4A5568;
+        }
+
+        .story-text {
+            text-align: left;
+            line-height: 1.8;
+            word-break: keep-all;
+        }
+
+        /* Webtoon Viewer */
+        .webtoon-viewer {
+            max-height: 650px;
+            overflow-y: auto;
+            border: 2px solid #e2e8f0;
+            border-radius: 1rem;
+            background: #fdfdfd;
+            position: relative;
+        }
+
+        .webtoon-viewer img {
+            width: 100%;
+            display: block;
+            height: auto;
+        }
+
+        /* Image Slider for 2D Art */
+        .slider-container {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            overflow: hidden;
+            border-radius: 1.5rem;
+            background-color: #f8fafc;
+        }
+
+        .slider-track {
+            display: flex;
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            height: 100%;
+        }
+
+        .slide {
+            min-width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .slide img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        .slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.8);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 10;
+            transition: all 0.3s ease;
+        }
+
+        .slider-btn:hover {
+            background: white;
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .prev-btn { left: 10px; }
+        .next-btn { right: 10px; }
+
+        .slider-pagination {
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+            z-index: 10;
+        }
+
+        .page-dot {
+            width: 8px;
+            height: 8px;
+            background: rgba(0,0,0,0.2);
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .page-dot.active {
+            background: #4A5568;
+            width: 20px;
+            border-radius: 4px;
+        }
+
+        /* Awards Display */
+        .awards-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .award-img-wrapper {
+            position: relative;
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            background: #fff;
+            aspect-ratio: 4/3;
+        }
+
+        .award-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        /* Portfolio Button */
+        .portfolio-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background-color: #4A5568;
+            color: white;
+            padding: 12px 28px;
+            border-radius: 50px;
+            font-weight: 700;
+            margin-top: 2rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(74, 85, 104, 0.2);
+        }
+
+        /* Storybook Button */
+        .storybook-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background-color: #f1f5f9;
+            color: #64748b;
+            padding: 6px 14px;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            border: 1px solid #e2e8f0;
+            margin-left: 12px;
+            vertical-align: middle;
+        }
+
+        .storybook-btn:hover {
+            background-color: #e2e8f0;
+            color: #334155;
+            transform: translateY(-1px);
+        }
+
+        /* Future Section Q&A Styles */
+        .qa-container {
+            border-left: 4px solid #818cf8;
+            padding-left: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .qa-question {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #4338ca;
+            margin-bottom: 1rem;
+        }
+
+        /* Insight Section Custom Styles */
+        .insight-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .insight-card {
+            background: #f8fafc;
+            padding: 1.5rem;
+            border-radius: 1rem;
+            text-align: left;
+        }
+
+        .stat-main {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--indigo-600);
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .data-source {
+            font-size: 0.75rem;
+            color: #94a3b8;
+            margin-top: 2rem;
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Home Button -->
+    <a href="../index.html" class="home-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        <span>HOME</span>
+    </a>
+
+    <!-- Navigation Dots -->
+    <div class="nav-dots">
+        <a href="#intro" class="dot active" title="자기소개"></a>
+        <a href="#major" class="dot" title="전공소개"></a>
+        <a href="#insight" class="dot" title="인사이트"></a>
+        <a href="#multimedia" class="dot" title="멀티미디어"></a>
+        <a href="#future" class="dot" title="미래계획"></a>
+    </div>
+
+    <!-- 1. 자기소개 영역 -->
+    <section id="intro" class="fade-in">
+        <p class="section-label">SECTION 01</p>
+        <h2 class="section-title">자기 소개</h2>
+        <div class="max-w-3xl card">
+            <div class="mb-8 text-center">
+                <p class="text-lg font-bold text-indigo-600 mb-2">부산대학교 애니메이션학과</p>
+                <span class="text-sm font-bold tracking-widest text-indigo-400">202166230</span>
+                <h1 class="text-4xl font-bold mt-2 mb-1">양주한</h1>
+                <p class="text-lg italic opacity-80">"운이 좋은 창작자"</p>
+            </div>
+            
+            <div class="story-text space-y-6 text-gray-700">
+                <p>
+                    저의 전공은 원래 <span class="accent-box">경영학과</span>였습니다. 딱히 비전이 있어 경영학도가 된 것은 아니고, 그저 성적에 따라 가장 괜찮은 대학으로 입학했습니다. 그곳에서 1학년을 보내고 군에 입대하게 됩니다.
+                </p>
+                <p>
+                    군 부대에서, 한 밤중에 초소에서 홀로 수많은 생각을 하며, 나는 경영학과와 맞지 않다고, 전역하고 사회로 나가면 하고 싶은 일을 하자고 다짐했습니다. <strong>내가 가장 좋아하는 것은 그림이었습니다.</strong> 제대로 배워본 적은 없지만, 혼자서 그림을 그릴 때가 가장 즐거웠습니다.
+                </p>
+                <p>
+                    그렇기에 진로를 바꿨습니다. 남들보다 늦었지만, 다니던 학교를 자퇴하고, 다시 수능 공부를 하고, 실기 시험을 쳐서 <span class="accent-box">애니메이션 학과</span>에 다시 입학했습니다.
+                </p>
+                <p class="pt-4 border-t border-gray-100 font-medium">
+                    사람들은 취미와 일을 분리하곤 하지만, 저는 운이 좋게도 그 경계가 없습니다. <strong>하지만 이 운은, 저의 결정으로 쟁취해 낸 것이기도 합니다.</strong>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. 전공소개 영역 -->
+    <section id="major" class="bg-white fade-in">
+        <p class="section-label">SECTION 02</p>
+        <h2 class="section-title">전공 소개</h2>
+        <div class="max-w-4xl card">
+            <div class="story-text space-y-10 text-gray-700">
+                <div>
+                    <p class="text-xl font-bold mb-4 text-gray-800">단순한 움직임을 넘어 시각적 가치를 설계하는 일</p>
+                    <p class="mb-4">
+                        '그림을 그리는 사람'에게 필요한 거의 모든 시각적 도구들을 골고루 경험하며 기본기를 다졌습니다. 포토샵, 클립스튜디오 등의 프로그램을 사용하여 2D 일러스트와 웹툰에 대해 익혔고, 마야(Maya)를 비롯한 3D 프로그램을 다루며 공간을 설계하는 입체적인 감각을 익혔습니다.
+                    </p>
+                </div>
+
+                <div class="pt-10 border-t border-gray-100">
+                    <h3 class="text-2xl font-bold text-center mb-8 text-indigo-600">[전공과 나의 연결고리 : 즐거움]</h3>
+                    
+                    <div class="grid md:grid-cols-2 gap-6 mb-8">
+                        <div class="bg-indigo-50 p-6 rounded-2xl">
+                            <p class="font-bold text-indigo-600 mb-3">관심사</p>
+                            <p class="text-sm">그림의 첫 시작은 종이와 화면 위에 그려내는 <strong>일러스트와 웹툰</strong>이었습니다. 이제는 그 관심사가 <span class="accent-box">3D 이펙트</span>라는 더 넓은 영역으로 확장되고 있습니다.</p>
+                        </div>
+                        <div class="bg-slate-50 p-6 rounded-2xl">
+                            <p class="font-bold text-slate-600 mb-3">강점: 자발적인 몰입</p>
+                            <p class="text-sm">누군가의 부탁이나 명령 없이도 <strong>스스로 책상 앞을 지키는 힘</strong>은, 제가 이 일을 진심으로 즐기고 있다는 가장 확실한 증거입니다.</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-gray-50 p-8 rounded-2xl border border-gray-100 text-center">
+                        <p class="font-bold text-gray-800 mb-3 text-lg">[경험의 기록: 웹툰 대회 우승과 꾸준한 작업]</p>
+                        <p class="text-gray-600 leading-relaxed mb-6 text-left">
+                            이러한 몰입의 시간은 실질적인 성과로 이어지기도 했습니다. 캡스톤 디자인 웹툰 대회에서 우승하며 동기들과 기획과 작화의 합을 맞추는 경험을 했고, 그 외에도 수많은 작업물을 쌓아오며 실력을 다졌습니다.
+                        </p>
+                        <a href="#multimedia" class="portfolio-btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+                            작업물 보러 가기
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. 데이터/인사이트 영역 (NotebookLM 자료 반영) -->
+    <section id="insight" class="fade-in">
+        <p class="section-label">SECTION 03</p>
+        <div class="flex items-center justify-center gap-2 mb-2">
+            <h2 class="section-title mb-0">데이터 / 인사이트</h2>
+            <a href="https://gemini.google.com/share/fb3d67c4e541" target="_blank" class="storybook-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+                스토리북 보기
+            </a>
+        </div>
+        <div class="card mt-8">
+            <div class="story-text">
+                <h3 class="text-2xl font-bold mb-4 text-center">"디자인의 진화: 4차 산업과 K-콘텐츠가 견인하는 전망"</h3>
+                <p class="mb-8 text-center text-gray-500 italic">디자인은 이제 심미적 장식을 넘어 기술과 인간을 연결하는 '핵심 전략 자산'입니다.</p>
+                
+                <!-- 취업률 데이터 -->
+                <div class="mb-10">
+                    <p class="font-bold text-indigo-600 mb-4 flex items-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"/><path d="M22 12A10 10 0 0 0 12 2v10z"/></svg>
+                        디자인 학과 취업 현황 (시각디자인·융합 중심)
+                    </p>
+                    <div class="space-y-4">
+                        <div class="text-left">
+                            <div class="flex justify-between mb-1 text-sm font-bold">
+                                <span>한성대 (시각영상디자인)</span>
+                                <span>90.9%</span>
+                            </div>
+                            <div class="progress-container"><div class="progress-bar" data-width="90.9%"></div></div>
+                        </div>
+                        <div class="text-left">
+                            <div class="flex justify-between mb-1 text-sm font-bold">
+                                <span>이화여대 (시각디자인)</span>
+                                <span>84.4%</span>
+                            </div>
+                            <div class="progress-container"><div class="progress-bar" data-width="84.4%"></div></div>
+                        </div>
+                        <div class="text-left">
+                            <div class="flex justify-between mb-1 text-sm font-bold text-gray-400">
+                                <span>전국 평균 취업률</span>
+                                <span>65.4%</span>
+                            </div>
+                            <div class="progress-container"><div class="progress-bar bg-gray-300" data-width="65.4%"></div></div>
+                        </div>
+                    </div>
+                    <p class="mt-4 text-sm text-gray-600 bg-gray-50 p-4 rounded-lg">
+                        <strong>분석가 제언:</strong> 높은 취업률을 기록한 대학의 공통점은 '영상', 'UX/UI', '융합 커리큘럼'의 선제적 구축입니다. 시장은 이제 단일 전공보다 <strong>매체 융합적 사고</strong>를 갖춘 인재를 갈구합니다.
+                    </p>
+                </div>
+
+                <!-- 산업 지표 -->
+                <div class="insight-grid">
+                    <div class="insight-card border-l-4 border-indigo-400">
+                        <span class="stat-main">~2.2조 원</span>
+                        <p class="font-bold text-gray-800">K-웹툰 시장 규모 (2023)</p>
+                        <p class="text-xs mt-2 text-gray-500">2017년 대비 약 5.7배 폭발적 성장. 글로벌 IP 비즈니스의 핵심 생태계로 자리매김.</p>
+                    </div>
+                    <div class="insight-card border-l-4 border-indigo-400">
+                        <span class="stat-main">46.5%</span>
+                        <p class="font-bold text-gray-800">콘텐츠 수출 비중</p>
+                        <p class="text-xs mt-2 text-gray-500">일본, 북미 등 글로벌 수요 급증. 이제 디자이너는 글로벌 기획 역량이 필수입니다.</p>
+                    </div>
+                    <div class="insight-card border-l-4 border-indigo-400">
+                        <span class="stat-main">2,000억+</span>
+                        <p class="font-bold text-gray-800">AI 저작권 보호 가치</p>
+                        <p class="text-xs mt-2 text-gray-500">네이버 '툰레이더' 등 기술을 통한 창작 생태계 수호. AI는 위협이 아닌 강력한 조력자입니다.</p>
+                    </div>
+                </div>
+
+                <div class="mt-8 p-6 bg-indigo-50 rounded-2xl">
+                    <p class="font-bold text-gray-800 mb-2">💡 미래 커리어 경쟁력: Problem Solver</p>
+                    <p class="text-sm leading-relaxed text-gray-700">
+                        오늘날의 디자이너는 단순한 '조형가'가 아닌, 기술적 숙련도 위에 인문학적 통찰을 얹어 문제를 해결하는 <strong>문제 해결사</strong>여야 합니다. 디지털 트윈, VR/AR, 3D 모델링 등 첨단 혁신 기술을 자유자재로 다루며 고부가가치를 창출해야 합니다.
+                    </p>
+                </div>
+                
+                <p class="data-source">Source: 2023 디자인 산업 동향 보고서 & NotebookLM 분석 자료 기반</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. 멀티미디어 영역 -->
+    <section id="multimedia" class="bg-white fade-in">
+        <p class="section-label">SECTION 04</p>
+        <h2 class="section-title">멀티미디어</h2>
+        
+        <div class="max-w-5xl w-full grid md:grid-cols-5 gap-8 items-start">
+            
+            <!-- 웹툰 뷰어 (좌측/상단) -->
+            <div class="md:col-span-3">
+                <div class="flex justify-between items-end mb-4">
+                    <h4 class="font-bold text-gray-800 text-lg">🏆 캡스톤 디자인 우승작</h4>
+                    <span class="text-xs text-indigo-500 font-medium bg-indigo-50 px-3 py-1 rounded-full">상하 스크롤</span>
+                </div>
+                
+                <div class="webtoon-viewer shadow-xl">
+                    <img src="KakaoTalk_20260424_193729888_02.jpg" alt="웹툰 파트 1" onerror="this.src='https://via.placeholder.com/800x2000?text=Webtoon+Part+1'">
+                    <img src="KakaoTalk_20260424_193729888_03.jpg" alt="웹툰 파트 2" onerror="this.src='https://via.placeholder.com/800x2000?text=Webtoon+Part+2'">
+                </div>
+            </div>
+
+            <!-- 캐릭터 디자인 및 기타 (우측/하단) -->
+            <div class="md:col-span-2 space-y-12">
+                
+                <!-- 2D 캐릭터 슬라이더 -->
+                <div>
+                    <h4 class="font-bold text-gray-800 text-lg mb-4 text-left">🎨 2D 캐릭터 디자인 습작</h4>
+                    <div class="slider-container shadow-lg border border-gray-100">
+                        <div class="slider-track" id="sliderTrack">
+                            <div class="slide"><img src="일러스트2.jpg" alt="디자인 1" onerror="this.src='https://via.placeholder.com/400x500?text=Character+1'"></div>
+                            <div class="slide"><img src="일러스트4.jpg" alt="디자인 2" onerror="this.src='https://via.placeholder.com/400x500?text=Character+2'"></div>
+                            <div class="slide"><img src="일러스트6.jpg" alt="디자인 3" onerror="this.src='https://via.placeholder.com/400x500?text=Character+3'"></div>
+                        </div>
+                        
+                        <button class="slider-btn prev-btn" id="prevBtn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+                        </button>
+                        <button class="slider-btn next-btn" id="nextBtn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+                        </button>
+
+                        <div class="slider-pagination" id="sliderPagination"></div>
+                    </div>
+                </div>
+
+                <!-- 3D 영역 (수상 증빙) -->
+                <div>
+                    <h4 class="font-bold text-gray-800 text-lg mb-4 text-left">✨ 3D Dynamics & Awards</h4>
+                    <div class="awards-grid">
+                        <div class="award-img-wrapper">
+                            <img src="KakaoTalk_20260424_193729888.jpg" alt="캡스톤 디자인 결과물" onerror="this.src='https://via.placeholder.com/300x400?text=Result'">
+                        </div>
+                        <div class="award-img-wrapper">
+                            <img src="KakaoTalk_20260424_200204678.jpg" alt="경진대회 수상 판넬" onerror="this.src='https://via.placeholder.com/300x400?text=Award'">
+                        </div>
+                    </div>
+                    <p class="text-[10px] text-gray-500 mt-3 text-left">2023 PNU LINC 3.0 캡스톤 디자인 경진대회 우수상 수상</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. 마무리 영역 (미래 계획 상세) -->
+    <section id="future" class="fade-in bg-slate-50">
+        <p class="section-label">SECTION 05</p>
+        <h2 class="section-title">미래 계획</h2>
+        
+        <div class="max-w-4xl w-full space-y-8">
+            <!-- 질문 1 -->
+            <div class="card text-left">
+                <div class="qa-container">
+                    <h3 class="qa-question">Q. 나의 전공은 사회와 미래에 어떤 의미를 가지는가?</h3>
+                    <div class="qa-answer space-y-4">
+                        <p class="font-bold text-lg text-gray-800">
+                            "AI가 수만 장의 이미지를 순식간에 만들어내는 시대가 되었지만, 역설적으로 그렇기에 '인간의 의도가 담긴 한 줄의 선'은 더욱 귀해질 것입니다."
+                        </p>
+                        <p>
+                            애니메이션과 시각 예술은 단순히 예쁜 그림을 만드는 일이 아니라, 사람의 감정을 건드리는 <strong>'공감의 설계'이자 이야기</strong>입니다. AI는 패턴을 복제할 뿐, 창작자가 책상 앞에 앉아 고뇌하며 담아낸 특유의 호흡이나 미세한 감정의 결까지 흉내 낼 수는 없습니다.
+                        </p>
+                        <p>
+                            미래 사회에서 전공자의 역할은 단순 제작자가 아닌, AI라는 거대한 도구를 길들이고 그 결과물에 <strong>'인간적인 가치'를 부여하는 디렉터</strong>가 되는 것입니다. 기술이 발전할수록 사람들은 더 인간다운 이야기, 누군가의 진심이 담긴 시각적 경험을 갈구할 것이고, 디자인 학과는 그 갈증을 채워주는 역할을 하게 될 것입니다.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 질문 2 -->
+            <div class="card text-left">
+                <div class="qa-container">
+                    <h3 class="qa-question">Q. 나는 앞으로 어떤 진로를 그리고 있는가?</h3>
+                    <div class="qa-answer space-y-4">
+                        <p>
+                            창작자로서의 길은 냉혹합니다. 단순히 그림을 좋아한다는 마음만으로는 성공하기 어려운 웹툰과 일러스트 시장의 현실을 마주하며, 저는 제가 배운 기술을 가장 가치 있게 활용할 수 있는 곳이 어디인지 고민했습니다. 그때 만난 것이 바로 <strong>'3D 이펙트'</strong>였습니다.
+                        </p>
+                        <p>
+                            2D 일러스트로 다진 색감과 구성력, Maya를 배우며 익힌 3D 공간 감각을 그대로 활용하면서도, 게임이라는 거대한 산업 안에서 나의 결과물이 생동감 있게 살아 움직이는 과정은 저에게 큰 재미와 확신을 주었습니다.
+                        </p>
+                        <p>
+                            현재 저는 3D Max를 비롯해 <strong>유니티(Unity), 언리얼 엔진 5(UE5)</strong>를 깊이 있게 파고들고 있습니다. 목표는 명확합니다. 유저의 가슴을 뛰게 만드는 <strong>'게임 3D 이펙터'</strong>가 되는 것입니다. 2D와 3D는 긴밀하게 연결되어 있습니다. 제가 앞에서 일러스트를 그리고, 웹툰을 그린 경험들이 전부 저의 3D 이펙터로서의 삶에 양분이 될 것입니다.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 프로필 요약 -->
+                <div class="mt-12 pt-8 border-t border-gray-100 flex items-center gap-4">
+                    <div class="w-14 h-14 bg-indigo-600 rounded-full flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-indigo-200">JU</div>
+                    <div>
+                        <p class="font-bold text-gray-800 text-lg">양주한 (Ju Han Yang)</p>
+                        <p class="text-sm text-gray-500">2D Artist to Next-Gen 3D Effector</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-12 bg-white border-t border-gray-100 text-center text-sm text-gray-400">
+        © 2024 Ju Han Yang Portfolio. All rights reserved.
+    </footer>
+
+    <script>
+        // Intersection Observer for scroll animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    const progressBars = entry.target.querySelectorAll('.progress-bar');
+                    progressBars.forEach(bar => {
+                        bar.style.width = bar.getAttribute('data-width');
+                    });
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.fade-in').forEach(section => observer.observe(section));
+
+        // Slider Logic
+        const track = document.getElementById('sliderTrack');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const pagination = document.getElementById('sliderPagination');
+        const slides = document.querySelectorAll('.slide');
+        let currentIndex = 0;
+
+        // Init Pagination
+        slides.forEach((_, idx) => {
+            const dot = document.createElement('div');
+            dot.classList.add('page-dot');
+            if (idx === 0) dot.classList.add('active');
+            dot.onclick = () => goToSlide(idx);
+            pagination.appendChild(dot);
+        });
+
+        function updateSlider() {
+            if (!track) return;
+            track.style.transform = `translateX(-${currentIndex * 100}%)`;
+            const dots = document.querySelectorAll('.page-dot');
+            dots.forEach((dot, idx) => {
+                dot.classList.toggle('active', idx === currentIndex);
+            });
+        }
+
+        function goToSlide(index) {
+            currentIndex = index;
+            updateSlider();
+        }
+
+        if (nextBtn) {
+            nextBtn.onclick = () => {
+                currentIndex = (currentIndex + 1) % slides.length;
+                updateSlider();
+            };
+        }
+
+        if (prevBtn) {
+            prevBtn.onclick = () => {
+                currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+                updateSlider();
+            };
+        }
+
+        // Navigation Highlight
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section');
+            const dots = document.querySelectorAll('.nav-dots .dot');
+            let current = '';
+            sections.forEach(section => {
+                if (window.pageYOffset >= (section.offsetTop - 300)) {
+                    current = section.getAttribute('id');
+                }
+            });
+            dots.forEach(dot => {
+                dot.classList.toggle('active', dot.getAttribute('href') === `#${current}`);
+            });
+        });
+    </script>
+</body>
+</html>
