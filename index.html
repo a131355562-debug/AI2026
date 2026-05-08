@@ -374,7 +374,32 @@
                     </div>
                 `
             },
-            { id: 6, title: "챗봇 UX 시나리오", tools: ["Voiceflow", "Figma"], color: "#EF4444", summary: "사용자 경험을 고려한 대화형 인터페이스 설계.", detail: "고객 맞춤형 상담을 위한 챗봇의 트리 구조를 설계했습니다." },
+            { 
+                id: 6, 
+                title: "코랩을 활용한 데이터분석", 
+                tools: ["Google Colab", "Python", "Pandas"], 
+                color: "#EF4444", 
+                summary: "Python 라이브러리를 활용한 공공 데이터 분석.", 
+                detail: `
+                    <div class='space-y-6'>
+                        <section>
+                            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-2">
+                                <h5 class='text-lg font-bold text-red-400'>고령운전자 사고 분석</h5>
+                                <a href="./06/index.html" class="inline-block px-3 py-1 text-xs rounded-lg bg-red-500/20 text-red-400 border border-red-500/30 hover:bg-red-500 hover:text-white transition-all text-center">결과물 보기</a>
+                            </div>
+                            <p class='text-sm opacity-80'>급증하는 고령운전자 교통사고 데이터를 연령대별, 유형별로 분석하여 사고 발생 원인과 주요 위험 요인을 도출했습니다.</p>
+                        </section>
+                        <section class="mt-6">
+                            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-2">
+                                <h5 class='text-lg font-bold text-red-400'>시간대 별 자전거 사고 분석</h5>
+                                <a href="./06-1/index.html" class="inline-block px-3 py-1 text-xs rounded-lg bg-red-500/20 text-red-400 border border-red-500/30 hover:bg-red-500 hover:text-white transition-all text-center">결과물 보기</a>
+                            </div>
+                            <p class='text-sm opacity-80'>자전거 사고가 집중되는 시간대를 파악하기 위해 시계열 데이터를 시각화하고, 출퇴근 시간대 등 특정 시간의 위험도를 분석했습니다.</p>
+                        </section>
+                    </div>
+                `,
+                hidePlus: true // 6번 카드의 플러스 버튼을 숨기기 위한 플래그
+            },
             { id: 7, title: "윤리적 AI 비평", tools: ["Notion", "Ethics"], color: "#06B6D4", summary: "AI 저작권 및 편향성에 대한 심도 있는 리서치.", detail: "인공지능의 발전 과정에서 발생하는 윤리적 문제와 해결 방안을 고찰했습니다." },
             { id: 10, title: "파이널 포트폴리오", tools: ["HTML5", "Tailwind"], color: "#F43F5E", summary: "모든 과업을 집대성한 웹 포트폴리오.", detail: "학습한 모든 AI 기술을 활용하여 자신만의 정체성을 담은 결과물을 구축했습니다." }
         ];
@@ -399,14 +424,16 @@
                 <div class="mt-8 flex items-center justify-between">
                     <div class="text-xs font-semibold opacity-70 group-hover:opacity-100 transition-opacity" style="color: ${p.color}">DETAILS</div>
                     
-                    <a href="${p.link ? p.link : '#'}" 
-                       class="w-10 h-10 rounded-full border border-current flex items-center justify-center opacity-40 group-hover:opacity-100 transition-all hover:bg-current hover:text-white" 
-                       style="color: ${p.color}"
-                       onclick="event.stopPropagation(); if('${p.link}') window.location.href='${p.link}';">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"/>
-                        </svg>
-                    </a>
+                    ${!p.hidePlus ? `
+                        <a href="${p.link ? p.link : '#'}" 
+                           class="w-10 h-10 rounded-full border border-current flex items-center justify-center opacity-40 group-hover:opacity-100 transition-all hover:bg-current hover:text-white" 
+                           style="color: ${p.color}"
+                           onclick="event.stopPropagation(); if('${p.link}') window.location.href='${p.link}';">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"/>
+                            </svg>
+                        </a>
+                    ` : ''}
                 </div>
             `;
             cardGrid.appendChild(card);
