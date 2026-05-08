@@ -3,244 +3,270 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SafeRide 뉴스 | 자전거 사고 분석 리포트</title>
+    <title>SafeRide | 데이터 인포그래픽 리포트</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700&family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg-paper: #f9f7f2;
-            --text-main: #1a1a1a;
             --accent-teal: #2d6a4f;
+            --accent-orange: #e67e22;
         }
         body {
             font-family: 'Noto Sans KR', sans-serif;
             background-color: var(--bg-paper);
-            color: var(--text-main);
-            line-height: 1.8;
+            color: #333;
+            overflow-x: hidden;
         }
-        /* 뉴스 헤드라인용 서체 */
-        .headline-serif {
-            font-family: 'Noto Serif KR', serif;
+        .headline-serif { font-family: 'Noto Serif KR', serif; }
+
+        /* 인포그래픽 섹션 스타일 */
+        .info-section {
+            padding: 4rem 1.5rem;
+            max-width: 1000px;
+            margin: 0 auto;
         }
-        /* 신문 느낌의 구분선 */
-        .news-border-heavy { border-bottom: 3px solid #1a1a1a; }
-        .news-border-light { border-bottom: 1px solid #d1d1d1; }
         
-        /* 캡션 스타일 */
-        .caption {
-            font-size: 0.85rem;
-            color: #666;
-            margin-top: 0.5rem;
-            text-align: center;
-        }
-
-        /* 기사 본문 첫 글자 강조 */
-        .dropcap::first-letter {
-            font-family: 'Noto Serif KR', serif;
-            float: left;
-            font-size: 4.5rem;
+        .data-number {
+            font-size: 4rem;
+            font-weight: 800;
             line-height: 1;
-            padding-right: 0.75rem;
-            font-weight: bold;
             color: var(--accent-teal);
-        }
-
-        .chart-wrapper {
-            background: #ffffff;
-            border: 1px solid #eee;
-            padding: 1.5rem;
-            margin: 2.5rem 0;
-        }
-
-        /* 인용구 스타일 */
-        blockquote {
-            border-top: 1px solid #1a1a1a;
-            border-bottom: 1px solid #1a1a1a;
-            padding: 1.5rem 0;
-            margin: 2.5rem 0;
             font-family: 'Noto Serif KR', serif;
-            font-size: 1.4rem;
-            text-align: center;
-            color: #222;
         }
 
-        /* 홈 버튼 스타일 */
+        .chart-box {
+            background: white;
+            border-radius: 2rem;
+            padding: 2.5rem;
+            box-shadow: 0 15px 35px -10px rgba(0,0,0,0.05);
+        }
+
+        /* 홈 버튼 */
         .home-btn {
-            position: absolute;
-            right: 0;
-            top: -35px;
+            position: fixed;
+            right: 2rem;
+            top: 2rem;
+            z-index: 100;
+            background: white;
+            padding: 0.5rem 1rem;
+            border-radius: 99px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            font-weight: bold;
+            font-size: 0.8rem;
             display: flex;
             align-items: center;
-            font-size: 0.85rem;
-            font-weight: bold;
-            color: #555;
-            text-decoration: none;
-            transition: color 0.2s;
+            transition: all 0.3s;
         }
-        .home-btn:hover {
-            color: var(--accent-teal);
+        .home-btn:hover { transform: translateY(-2px); }
+
+        /* 애니메이션 효과 */
+        .fade-in {
+            animation: fadeIn 1s ease-out forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 기사 요약 카드 스타일 */
+        .article-summary-card {
+            background: white;
+            border-left: 5px solid var(--accent-teal);
+            padding: 2rem;
+            border-radius: 0 1.5rem 1.5rem 0;
+            margin-top: 2rem;
         }
     </style>
 </head>
-<body class="p-4 md:p-0">
+<body class="antialiased">
 
-    <!-- 신문 상단 헤더 -->
-    <header class="max-w-4xl mx-auto mt-12 mb-12 relative">
-        <!-- 우측 상단 홈 버튼 -->
-        <a href="../index.html" class="home-btn">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-            </svg>
-            HOME
-        </a>
+    <!-- 홈 버튼 -->
+    <a href="../index.html" class="home-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+        </svg>
+        HOME
+    </a>
 
-        <div class="flex justify-between items-end pb-2 news-border-heavy">
-            <div class="text-sm font-bold">Vol. 2026-0508</div>
-            <div class="text-3xl font-black headline-serif tracking-tighter text-teal-900">SafeRide Daily</div>
-            <div class="text-sm font-bold">2026년 5월 8일 금요일</div>
-        </div>
-        <div class="py-2 flex justify-center space-x-6 text-xs font-medium border-b border-gray-300">
-            <span>사회면</span>
-            <span>데이터 저널리즘</span>
-            <span>교통안전 기획</span>
+    <!-- 메인 비주얼 -->
+    <header class="min-h-screen flex flex-col justify-center items-center text-center px-6 bg-white">
+        <div class="fade-in">
+            <span class="inline-block px-4 py-1 mb-6 text-sm font-bold tracking-widest text-teal-800 border border-teal-200 rounded-full bg-teal-50">DATA INFOGRAPHIC REPORT</span>
+            <h1 class="text-4xl md:text-6xl font-bold headline-serif leading-tight mb-8">
+                자전거가 가장 <br><span class="text-teal-700">위험한 순간</span>은 언제일까?
+            </h1>
+            <p class="text-lg text-gray-500 max-w-xl mx-auto mb-12">
+                최근 5개년 사고 데이터를 분석하여 얻은 <br>자전거 안전의 핵심 지표와 심층 분석 내용을 공개합니다.
+            </p>
+            <div class="flex flex-col items-center">
+                <span class="text-xs font-bold text-gray-400 mb-2 uppercase tracking-widest">Scroll down</span>
+                <div class="w-px h-16 bg-gray-200"></div>
+            </div>
         </div>
     </header>
 
-    <main class="max-w-3xl mx-auto">
-        <!-- 기사 제목 섹션 -->
-        <section class="mb-10">
-            <h2 class="text-xl font-medium text-teal-800 mb-2">[심층기획: 데이터로 본 교통안전]</h2>
-            <h1 class="text-3xl md:text-5xl font-bold headline-serif leading-tight mb-6">
-                '자전거 사고' 해 질 녘이 가장 위험... <br>
-                오후 4~8시 사이 전체 사고의 30.2% 집중
-            </h1>
+    <!-- 섹션 1: 시간대 -->
+    <section class="info-section bg-[#f0f4f1]">
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+            <div>
+                <span class="text-teal-600 font-bold text-sm tracking-widest">POINT 01. TIME</span>
+                <h2 class="text-3xl font-bold headline-serif mt-2 mb-6">오후 4시부터 8시,<br>사고의 30%가 집중됩니다.</h2>
+                <div class="flex items-baseline space-x-2 mb-6">
+                    <span class="data-number">30.2%</span>
+                    <span class="text-gray-500 font-medium">전체 사고 중 비중</span>
+                </div>
+                <p class="text-gray-600 leading-relaxed">
+                    퇴근과 하교 시간이 겹치는 이 시간대는 시야가 급격히 어두워지는 골든아워입니다. 
+                    운전자의 인지 능력이 떨어지는 만큼 자전거의 존재를 알리는 전조등이 필수입니다.
+                </p>
+            </div>
+            <div class="chart-box">
+                <canvas id="timeChart"></canvas>
+            </div>
+        </div>
+    </section>
+
+    <!-- 섹션 2: 계절 -->
+    <section class="info-section">
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+            <div class="order-2 md:order-1 chart-box">
+                <canvas id="seasonChart"></canvas>
+            </div>
+            <div class="order-1 md:order-2">
+                <span class="text-orange-600 font-bold text-sm tracking-widest">POINT 02. SEASON</span>
+                <h2 class="text-3xl font-bold headline-serif mt-2 mb-6">가을은 라이딩의 성수기,<br>동시에 사고의 정점입니다.</h2>
+                <div class="flex items-baseline space-x-2 mb-6">
+                    <span class="data-number" style="color:#e67e22">9-10월</span>
+                </div>
+                <p class="text-gray-600 leading-relaxed">
+                    쾌적한 날씨에 이용자가 급증하는 9월과 10월은 연중 사고 발생 건수가 가장 많습니다. 
+                    여름에 비해 짧아진 낮의 길이를 인지하지 못한 채 주행하다 사고가 발생하는 경우가 빈번합니다.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 섹션 3: 예방수칙 인포그래픽 -->
+    <section class="info-section bg-[#1a1a1a] text-white rounded-t-[3rem]">
+        <div class="text-center mb-16">
+            <span class="text-teal-400 font-bold text-sm tracking-widest uppercase">Solution</span>
+            <h2 class="text-3xl font-bold headline-serif mt-2">사고를 줄이는 데이터 기반 해법</h2>
+        </div>
+        
+        <div class="grid md:grid-cols-3 gap-8 text-center">
+            <div class="p-8 border border-white/10 rounded-2xl">
+                <div class="text-5xl mb-6">🔦</div>
+                <h4 class="text-xl font-bold mb-4">전조등/후미등</h4>
+                <p class="text-gray-400 text-sm">상대 운전자의 인지 확률을 <br><span class="text-teal-400 font-bold">2배 이상</span> 높여줍니다.</p>
+            </div>
+            <div class="p-8 border border-white/10 rounded-2xl bg-white/5">
+                <div class="text-5xl mb-6">🎽</div>
+                <h4 class="text-xl font-bold mb-4">밝은 의류</h4>
+                <p class="text-gray-400 text-sm">검은 옷 대비 시인성을 <br><span class="text-teal-400 font-bold">150m 이상</span> 확보합니다.</p>
+            </div>
+            <div class="p-8 border border-white/10 rounded-2xl">
+                <div class="text-5xl mb-6">🔇</div>
+                <h4 class="text-xl font-bold mb-4">이어폰 해제</h4>
+                <p class="text-gray-400 text-sm">주변 위험 감지 속도를 <br><span class="text-teal-400 font-bold">30% 단축</span>시킵니다.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 섹션 4: 기사 요약 리포트 -->
+    <section class="info-section bg-[#f9f7f2]">
+        <div class="max-w-3xl mx-auto">
+            <h3 class="text-2xl font-bold headline-serif mb-8 flex items-center">
+                <span class="bg-teal-700 text-white p-1 px-3 rounded-lg mr-3 text-sm">Report</span>
+                심층 분석 기사 요약
+            </h3>
             
-            <div class="flex items-center justify-between py-4 border-t border-b border-gray-200 mb-8">
-                <div class="flex items-center">
-                    <div class="w-10 h-10 bg-gray-300 rounded-full mr-3 flex items-center justify-center text-gray-500 font-bold">양</div>
-                    <div class="text-sm">
-                        <span class="font-bold block text-gray-900">양주한 기자</span>
-                        <span class="text-gray-500">데이터경제부 · juhan.yang@saferide.com</span>
-                    </div>
-                </div>
-                <div class="text-xs text-gray-400 text-right">
-                    기사승인 2026.05.08 10:24<br>
-                    최종수정 2026.05.08 14:15
-                </div>
-            </div>
-        </section>
-
-        <!-- 기사 본문 섹션 -->
-        <article class="text-lg leading-relaxed text-gray-800">
-            <p class="dropcap mb-8">
-                최근 건강과 취미 생활을 위해 자전거를 이용하는 인구가 급증하고 있으나, 특정 시간대와 계절에 사고가 집중되고 있어 이용자들의 각별한 주의가 요구된다. 본지가 최근 5년간(2020~2024년) 발생한 자전거 교통사고 통계를 전수 분석한 결과, 하루 중 가장 위험한 시간대는 일몰 전후인 '오후 4시에서 8시' 사이인 것으로 확인됐다.
-            </p>
-
-            <div class="chart-wrapper">
-                <h4 class="text-center text-sm font-bold text-gray-600 mb-4 font-sans uppercase tracking-wider">시간대별 자전거 사고 발생 추이 (5개년 평균)</h4>
-                <canvas id="mainTimeChart"></canvas>
-                <p class="caption">※ 자료: 교통사고분석시스템(TASS) 데이터 재구성</p>
+            <div class="article-summary-card mb-8">
+                <h4 class="text-xl font-bold mb-3 headline-serif text-teal-900">1. 해 질 녘 시인성 급감, "보여야 피한다"</h4>
+                <p class="text-gray-700 leading-relaxed text-sm md:text-base">
+                    본지 분석 결과, 오후 4시부터 8시 사이 사고 집중은 단순한 우연이 아니었습니다. 이 시간대는 조도가 변하는 시기로 운전자의 눈이 적응하는 데 시간이 걸리며, 자전거의 작은 실루엣을 놓치기 쉽습니다. 특히 일몰 30분 전부터 조명을 켜는 '주간 주행등' 문화의 필요성이 대두되었습니다.
+                </p>
             </div>
 
-            <h3 class="text-2xl font-bold headline-serif mb-4 mt-12 text-gray-900">■ 시인성 급격히 떨어지는 퇴근길이 '사고 함정'</h3>
-            <p class="mb-6">
-                데이터에 따르면 자전거 사고는 오전 시간대에는 비교적 낮은 수치를 유지하다가, 오후 4시를 기점으로 가파르게 상승한다. 16시~18시와 18시~20시 구간은 전체 사고의 약 30%를 차지하며 하루 중 사고 발생 건수가 가장 많았다.
-            </p>
-            <p class="mb-6">
-                이는 학생들의 하교와 직장인들의 퇴근이 겹치며 도로 위 교통량이 최대치에 도달하기 때문이다. 특히 해가 지기 시작하는 이 시간대는 운전자의 눈이 조도 변화에 적응하는 과정에서 자전거를 미처 발견하지 못할 확률이 낮 시간에 비해 월등히 높다.
-            </p>
-
-            <blockquote>
-                "일몰 시간대는 빛의 굴절이 심하고 사물의 윤곽이 불분명해지는 시기입니다. 자전거 이용자와 운전자 모두 서로를 인지하기 가장 어려운 시기임을 명심해야 합니다."
-            </blockquote>
-
-            <h3 class="text-2xl font-bold headline-serif mb-4 mt-12 text-gray-900">■ 계절별로는 가을철 '9~10월' 가장 위험</h3>
-            <p class="mb-6 text-gray-700">
-                월별 통계를 분석해보면 야외 활동이 활발해지는 가을철의 위험성이 두드러졌다. 9월과 10월은 연중 자전거 사고가 가장 빈번한 시기로 나타났다. 쾌적한 날씨에 따라 나들이객이 늘어나고 자전거 라이딩 인구가 정점에 달하는 시기이기 때문이다.
-            </p>
-            
-            <div class="my-10 p-8 bg-emerald-50 rounded-lg border border-emerald-100">
-                <h4 class="text-lg font-bold text-emerald-900 mb-3">기자가 직접 해본 '안전 체크리스트'</h4>
-                <ul class="space-y-2 text-sm text-emerald-800">
-                    <li class="flex items-center">
-                        <span class="mr-2">✔</span> 전조등과 후미등은 오후 4시부터 켜져 있는가?
-                    </li>
-                    <li class="flex items-center">
-                        <span class="mr-2">✔</span> 어두운 옷 대신 시인성이 좋은 밝은 옷을 입었는가?
-                    </li>
-                    <li class="flex items-center">
-                        <span class="mr-2">✔</span> 보행자 혼용 도로에서 주변 소리를 듣기 위해 이어폰을 뺐는가?
-                    </li>
-                </ul>
+            <div class="article-summary-card mb-8" style="border-left-color: var(--accent-orange);">
+                <h4 class="text-xl font-bold mb-3 headline-serif text-orange-900">2. 가을철 이용자 증가와 사고의 상관관계</h4>
+                <p class="text-gray-700 leading-relaxed text-sm md:text-base">
+                    나들이객이 가장 많은 9~10월은 이용 인구 수 자체가 늘어나며 접촉 사고 빈도가 정점에 달합니다. 데이터는 가족 단위 이용자가 많은 공원 인근 도로와 퇴근길 자전거 전용 도로의 혼잡이 사고의 주된 원인임을 지적하고 있습니다.
+                </p>
             </div>
 
-            <p class="mb-6">
-                전문가들은 사고 예방을 위해 '등화장치'의 중요성을 거듭 강조한다. 단순히 앞을 보기 위한 용도가 아니라, 상대방에게 내 위치를 알리는 용도로 전조등과 후미등을 낮에도 사용하는 '주간 주행등' 문화 정착이 필요하다는 지적이다.
-            </p>
-
-            <p class="mb-12 font-medium text-gray-600">
-                정리=양주한 기자 <br>
-                도움말=도로교통공단 안전교육부
-            </p>
-        </article>
-
-        <!-- 관련 기사 링크 (신문 하단 느낌) -->
-        <section class="border-t-2 border-gray-900 pt-6 mb-20">
-            <h5 class="text-xs font-bold mb-4 tracking-widest text-gray-500 uppercase">Related Stories</h5>
-            <div class="grid md:grid-cols-2 gap-6">
-                <div class="group cursor-pointer">
-                    <p class="text-xs text-teal-600 font-bold mb-1">인터뷰</p>
-                    <h6 class="text-base font-bold group-hover:underline">"헬멧 하나가 생사 갈랐다"... 사고 생존자의 증언</h6>
-                </div>
-                <div class="group cursor-pointer">
-                    <p class="text-xs text-teal-600 font-bold mb-1">정책</p>
-                    <h6 class="text-base font-bold group-hover:underline">자전거 전용도로 확충, 사고율 얼마나 낮출 수 있나</h6>
-                </div>
+            <div class="article-summary-card mb-12" style="border-left-color: #666;">
+                <h4 class="text-xl font-bold mb-3 headline-serif text-gray-800">3. 전문가 제언: 장비보다 습관이 우선</h4>
+                <p class="text-gray-700 leading-relaxed text-sm md:text-base">
+                    양주한 기자는 심층 분석을 통해 고가의 장비보다 전조등 켜기, 밝은 옷 착용하기, 이어폰 빼기와 같은 '기본 수칙'만으로도 대형 사고의 70%를 예방할 수 있다고 전했습니다. "일몰 시간대는 자전거 이용자와 운전자 모두가 서로를 발견하기 가장 어려운 시기임을 명심해야 한다"는 것이 결론입니다.
+                </p>
             </div>
-        </section>
-    </main>
+
+            <div class="text-center py-10 border-t border-gray-200">
+                <p class="text-xs text-gray-400 mb-2 tracking-widest font-bold">WRITTEN BY</p>
+                <p class="text-sm font-bold text-gray-800 headline-serif">양주한 기자 · 데이터경제부</p>
+                <p class="text-xs text-gray-400 mt-1">juhan.yang@saferide.com</p>
+            </div>
+        </div>
+    </section>
 
     <footer class="bg-gray-100 py-10">
         <div class="max-w-4xl mx-auto px-6 text-center">
-            <div class="text-xl font-black headline-serif text-gray-400 mb-4 italic">SafeRide Daily Journalism</div>
-            <p class="text-xs text-gray-500">본 기사는 공공데이터포털의 교통사고 통계 라이선스를 준수하며, 파스텔 톤의 눈이 편안한 디자인 시스템을 적용했습니다.</p>
+            <div class="text-xl font-black headline-serif text-gray-400 mb-4 italic">SafeRide Daily Infographic</div>
+            <p class="text-xs text-gray-500">본 리포트는 공공데이터포털의 5개년 교통사고 통계 데이터를 바탕으로 인포그래픽화 되었습니다.</p>
+            <p class="mt-4 text-[10px] text-gray-300 tracking-widest uppercase">© 2026 All Rights Reserved.</p>
         </div>
     </footer>
 
     <script>
-        const ctx = document.getElementById('mainTimeChart').getContext('2d');
-        new Chart(ctx, {
-            type: 'line',
+        // 시간대별 차트
+        const ctxTime = document.getElementById('timeChart').getContext('2d');
+        new Chart(ctxTime, {
+            type: 'bar',
             data: {
-                labels: ['00-04시', '04-08시', '08-12시', '12-16시', '16-20시', '20-24시'],
+                labels: ['새벽', '오전', '오후', '저녁(피크)', '심야'],
                 datasets: [{
-                    label: '사고 발생 건수',
-                    data: [110, 240, 380, 420, 715, 310],
-                    borderColor: '#2d6a4f',
-                    backgroundColor: 'rgba(45, 106, 79, 0.1)',
-                    fill: true,
-                    tension: 0.4,
-                    pointRadius: 6,
-                    pointBackgroundColor: '#2d6a4f',
-                    borderWidth: 3
+                    label: '사고 비중(%)',
+                    data: [8, 15, 22, 30.2, 12],
+                    backgroundColor: ['#d1e8e2', '#d1e8e2', '#d1e8e2', '#2d6a4f', '#d1e8e2'],
+                    borderRadius: 10,
                 }]
             },
             options: {
                 responsive: true,
-                maintainAspectRatio: true,
-                plugins: {
-                    legend: { display: false }
-                },
+                plugins: { legend: { display: false } },
                 scales: {
-                    y: {
-                        beginAtZero: true,
-                        grid: { borderDash: [2, 2] }
-                    },
-                    x: {
-                        grid: { display: false }
-                    }
+                    y: { display: false },
+                    x: { grid: { display: false } }
                 }
+            }
+        });
+
+        // 계절별 차트 (레이더 차트)
+        const ctxSeason = document.getElementById('seasonChart').getContext('2d');
+        new Chart(ctxSeason, {
+            type: 'radar',
+            data: {
+                labels: ['봄', '여름', '가을(피크)', '겨울'],
+                datasets: [{
+                    label: '활동 지수',
+                    data: [70, 85, 98, 40],
+                    backgroundColor: 'rgba(230, 126, 34, 0.2)',
+                    borderColor: '#e67e22',
+                    pointBackgroundColor: '#e67e22',
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                scales: {
+                    r: {
+                        angleLines: { display: false },
+                        suggestedMin: 0,
+                        ticks: { display: false }
+                    }
+                },
+                plugins: { legend: { display: false } }
             }
         });
     </script>
