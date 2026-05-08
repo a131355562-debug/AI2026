@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>파스텔 뉴스 - 고령운전자 사고 급증</title>
+    <!-- Tailwind CSS 로드 -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js 로드 (그래프 렌더링용) -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- 웹 폰트 (Pretendard) 적용 -->
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard.css" />
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Pretendard', 'sans-serif'],
+                    },
+                    colors: {
+                        // 눈이 편안한 파스텔 커스텀 컬러
+                        pastel: {
+                            bg: '#fdfbf7',       // 따뜻하고 밝은 베이지 (배경)
+                            card: '#ffffff',     // 카드 배경
+                            mint: '#e6f3e6',     // 부드러운 민트 (포인트)
+                            peach: '#fff0e5',    // 부드러운 피치 (요약 박스)
+                            blue: '#eaf4f4',     // 부드러운 블루 (그래프 배경)
+                            text: '#4a5568',     // 부드러운 다크 그레이 (기본 텍스트)
+                            heading: '#2d3748',  // 진한 그레이 (제목)
+                            accent: '#6b9080',   // 차분한 녹색 (카테고리 태그)
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            /* 브라우저 기본 스크롤바 커스텀 */
+            ::-webkit-scrollbar { width: 8px; }
+            ::-webkit-scrollbar-track { background: #fdfbf7; }
+            ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+            ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+        }
+    </style>
+</head>
+<body class="bg-pastel-bg text-pastel-text antialiased font-sans flex flex-col min-h-screen selection:bg-pastel-mint selection:text-pastel-heading">
+
+    <!-- 상단 네비게이션 바 -->
+    <nav class="bg-white/80 backdrop-blur-md sticky top-0 z-10 border-b border-gray-100">
+        <div class="max-w-5xl mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-2 cursor-pointer">
+                <!-- 로고 아이콘 -->
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-pastel-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/>
+                    <path d="M18 14h-8"/>
+                    <path d="M15 18h-5"/>
+                    <path d="M10 6h8v4h-8V6Z"/>
+                </svg>
+                <span class="text-xl font-bold text-pastel-accent tracking-wide">Pastel News</span>
+            </div>
+            <div class="hidden md:flex items-center space-x-6 text-sm font-medium text-gray-500">
+                <a href="#" class="hover:text-pastel-accent transition-colors">홈</a>
+                <a href="#" class="text-pastel-accent border-b-2 border-pastel-accent pb-1">사회</a>
+                <a href="#" class="hover:text-pastel-accent transition-colors">정치</a>
+                <a href="#" class="hover:text-pastel-accent transition-colors">경제</a>
+                <a href="#" class="hover:text-pastel-accent transition-colors">오피니언</a>
+                <!-- 우측 상단 홈 버튼 추가 -->
+                <a href="../index.html" class="ml-4 bg-pastel-mint text-pastel-accent px-4 py-2 rounded-full hover:bg-pastel-accent hover:text-white transition-all flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                    </svg>
+                    Home
+                </a>
+            </div>
+            <button class="md:hidden text-gray-500">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+            </button>
+        </div>
+    </nav>
+
+    <!-- 메인 콘텐츠 영역 -->
+    <main class="flex-grow max-w-4xl mx-auto w-full px-4 py-8 md:py-12">
+        <!-- 기사 본문 컨테이너 -->
+        <article class="bg-pastel-card rounded-3xl shadow-sm border border-gray-100 p-6 md:p-12">
+            
+            <!-- 기사 헤더 -->
+            <header class="mb-10 pb-8 border-b border-gray-100">
+                <div class="flex items-center space-x-2 mb-4">
+                    <span class="bg-pastel-mint text-pastel-accent px-3 py-1 rounded-full text-xs font-bold tracking-wider">사회</span>
+                    <span class="bg-gray-100 text-gray-500 px-3 py-1 rounded-full text-xs font-bold tracking-wider">교통안전</span>
+                </div>
+                <h1 class="text-3xl md:text-4xl lg:text-5xl font-extrabold text-pastel-heading leading-tight mb-6 break-keep">
+                    전체 교통사고 줄어드는데…<br class="hidden md:block"> 고령운전자 사고 비중 '21%' 돌파
+                </h1>
+                
+                <div class="flex flex-col md:flex-row md:items-center justify-between text-gray-400 text-sm gap-4">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 rounded-full bg-pastel-peach flex items-center justify-center text-pastel-accent font-bold">
+                            기자
+                        </div>
+                        <div>
+                            <p class="font-semibold text-gray-600">양주한 기자</p>
+                            <p>입력: 2026-05-08 10:30</p>
+                        </div>
+                    </div>
+                    <div class="flex space-x-2">
+                        <!-- 공유 버튼 더미 -->
+                        <button class="p-2 bg-gray-50 rounded-full hover:bg-gray-100 transition" title="공유하기">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"></path></svg>
+                        </button>
+                        <button class="p-2 bg-gray-50 rounded-full hover:bg-gray-100 transition" title="인쇄하기">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg>
+                        </button>
+                    </div>
+                </div>
+            </header>
+
+            <!-- 기사 요약 박스 -->
+            <div class="bg-pastel-peach/50 p-6 rounded-2xl mb-10 border border-orange-50">
+                <ul class="space-y-3 text-[#d08c60] font-semibold text-lg">
+                    <li class="flex items-start">
+                        <svg class="w-6 h-6 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                        <span>2020년 14.8%에서 2024년 21.6%로 5년 연속 급증</span>
+                    </li>
+                    <li class="flex items-start">
+                        <svg class="w-6 h-6 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                        <span>전체 사고 감소세 속 고령운전자 사고만 '나홀로 증가'</span>
+                    </li>
+                    <li class="flex items-start">
+                        <svg class="w-6 h-6 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                        <span>초고령사회 진입 앞두고 실효성 있는 맞춤형 안전 대책 마련 시급</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- 기사 본문 -->
+            <div class="text-lg leading-loose space-y-8 break-keep">
+                <p>전체 교통사고 건수가 전반적인 감소세를 보이고 있음에도 불구하고, 고령 운전자가 낸 교통사고는 매년 큰 폭으로 증가하고 있는 것으로 나타났다. 특히 지난해 발생한 교통사고 5건 중 1건 이상은 고령 운전자에 의해 발생한 것으로 집계되어, 초고령사회 진입에 맞춘 근본적인 교통안전 대책 마련이 시급하다는 목소리가 커지고 있다.</p>
+
+                <p>최근 공개된 '고령운전자 사고현황(2020~2024)' 자료에 따르면, 전체 교통사고 건수는 2020년 20만 9,654건에서 2024년 19만 6,349건으로 약 6.3% 감소했다. 반면, 같은 기간 65세 이상 고령 운전자가 낸 교통사고는 2020년 3만 1,072건에서 2024년 4만 2,369건으로 무려 <strong class="text-pastel-accent font-bold bg-pastel-mint px-1">36.4%나 급증</strong>했다.</p>
+
+                <!-- 데이터 시각화 (차트) 영역 -->
+                <div class="my-12 bg-pastel-blue/30 p-6 rounded-2xl border border-blue-50 shadow-sm">
+                    <h3 class="text-center font-bold text-gray-600 mb-2">연도별 교통사고 및 고령운전자 사고 추이</h3>
+                    <p class="text-center text-sm text-gray-400 mb-6">(단위: 건, %)</p>
+                    <div class="relative w-full h-[300px] md:h-[400px]">
+                        <canvas id="accidentChart"></canvas>
+                    </div>
+                </div>
+
+                <p>연도별로 살펴보면 전체 교통사고가 등락을 거듭하며 우하향 곡선을 그리는 동안, 고령 운전자 사고는 단 한 번의 꺾임 없이 매년 가파른 상승세를 보였다. (2020년 3만 1,072건 → 2021년 3만 1,841건 → 2022년 3만 4,652건 → 2023년 3만 9,614건 → 2024년 4만 2,369건)</p>
+
+                <p>이에 따라 전체 교통사고에서 고령 운전자가 차지하는 비중도 폭발적으로 늘어났다. 2020년 14.8%에 불과했던 고령 운전자 사고 비율은 2021년 15.7%, 2022년 17.6%로 꾸준히 오르다 2023년 20.0%를 기록하며 처음으로 20% 벽을 돌파했다. 이어 2024년에는 21.6%까지 치솟으며 역대 최고치를 경신했다. 불과 5년 만에 전체 사고에서 차지하는 비중이 6.8%포인트나 급증한 것이다.</p>
+
+                <p>전문가들은 이러한 현상의 주된 원인으로 급속한 인구 고령화를 지목한다. 베이비부머 세대가 고령층에 대거 진입하면서 전체 운전면허 소지자 중 고령자가 차지하는 비율 자체가 늘어났기 때문이다. 게다가 나이가 들면서 나타나는 시력 저하, 반사 신경 및 인지 능력 둔화 등이 돌발 상황에서의 대처 능력을 떨어뜨려 사고 위험을 높이는 것으로 분석된다.</p>
+
+                <p>교통안전 관계자는 <span class="bg-gray-50 px-2 py-1 rounded text-gray-600 font-medium">"전체 교통사고가 줄어드는 추세 속에서 고령 운전자 사고만 나홀로 급증하고 있다는 통계는 우리 사회에 시사하는 바가 크다"</span>며, "운전면허 자진 반납 제도의 인센티브를 현실화하고, 고령자의 이동권을 보장할 수 있는 대체 대중교통 수단을 확충하는 등 다각적인 접근이 필요하다"고 강조했다.</p>
+
+                <p>또한 "조건부 면허제도 도입 등 운전자의 신체 능력을 고려한 제도적 보완과 함께, 도로 표지판 및 차선 확대 등 고령 친화적인 교통 환경(인프라) 개선도 병행되어야 할 것"이라고 덧붙였다.</p>
+            </div>
+
+            <!-- 기사 하단 태그 -->
+            <div class="mt-12 pt-6 border-t border-gray-100 flex flex-wrap gap-2">
+                <span class="bg-gray-100 text-gray-500 px-3 py-1 rounded-full text-sm hover:bg-gray-200 cursor-pointer transition">#고령운전자</span>
+                <span class="bg-gray-100 text-gray-500 px-3 py-1 rounded-full text-sm hover:bg-gray-200 cursor-pointer transition">#교통사고</span>
+                <span class="bg-gray-100 text-gray-500 px-3 py-1 rounded-full text-sm hover:bg-gray-200 cursor-pointer transition">#초고령사회</span>
+                <span class="bg-gray-100 text-gray-500 px-3 py-1 rounded-full text-sm hover:bg-gray-200 cursor-pointer transition">#교통안전</span>
+                <span class="bg-gray-100 text-gray-500 px-3 py-1 rounded-full text-sm hover:bg-gray-200 cursor-pointer transition">#면허반납</span>
+            </div>
+        </article>
+    </main>
+
+    <!-- 푸터 -->
+    <footer class="bg-white border-t border-gray-200 mt-12 py-8 text-center text-gray-400 text-sm">
+        <p>&copy; 2026 Pastel News. All rights reserved.</p>
+        <p class="mt-2">본 웹사이트는 눈이 편안한 디자인으로 설계되었습니다.</p>
+    </footer>
+
+    <!-- 차트 스크립트 -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const ctx = document.getElementById('accidentChart').getContext('2d');
+            
+            const colorTotal = 'rgba(148, 163, 184, 0.6)';
+            const colorTotalBorder = 'rgba(148, 163, 184, 1)';
+            const colorElderly = 'rgba(244, 162, 97, 0.8)';
+            const colorElderlyBorder = 'rgba(231, 111, 81, 1)';
+            const colorRatio = 'rgba(42, 157, 143, 1)';
+
+            const labels = ['2020년', '2021년', '2022년', '2023년', '2024년'];
+            const dataTotal = [209654, 203130, 196836, 198296, 196349];
+            const dataElderly = [31072, 31841, 34652, 39614, 42369];
+            const dataRatio = [14.8, 15.7, 17.6, 20.0, 21.6];
+
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: '전체 교통사고 (건)',
+                            data: dataTotal,
+                            backgroundColor: colorTotal,
+                            borderColor: colorTotalBorder,
+                            borderWidth: 1,
+                            borderRadius: 6,
+                            order: 2,
+                            yAxisID: 'y'
+                        },
+                        {
+                            label: '고령운전자 사고 (건)',
+                            data: dataElderly,
+                            backgroundColor: colorElderly,
+                            borderColor: colorElderlyBorder,
+                            borderWidth: 1,
+                            borderRadius: 6,
+                            order: 3,
+                            yAxisID: 'y'
+                        },
+                        {
+                            label: '고령운전자 사고 비율 (%)',
+                            data: dataRatio,
+                            type: 'line',
+                            backgroundColor: colorRatio,
+                            borderColor: colorRatio,
+                            borderWidth: 3,
+                            pointBackgroundColor: 'white',
+                            pointBorderColor: colorRatio,
+                            pointBorderWidth: 2,
+                            pointRadius: 5,
+                            pointHoverRadius: 7,
+                            fill: false,
+                            tension: 0.3,
+                            order: 1,
+                            yAxisID: 'y1'
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    interaction: { mode: 'index', intersect: false },
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                font: { family: "'Pretendard', sans-serif" },
+                                usePointStyle: true,
+                                padding: 20
+                            }
+                        },
+                        tooltip: {
+                            backgroundColor: 'rgba(255, 255, 255, 0.9)',
+                            titleColor: '#2d3748',
+                            bodyColor: '#4a5568',
+                            borderColor: '#e2e8f0',
+                            borderWidth: 1,
+                            padding: 12,
+                            titleFont: { size: 14, family: "'Pretendard', sans-serif" },
+                            bodyFont: { size: 13, family: "'Pretendard', sans-serif" },
+                            boxPadding: 4
+                        }
+                    },
+                    scales: {
+                        x: {
+                            grid: { display: false },
+                            ticks: { font: { family: "'Pretendard', sans-serif" } }
+                        },
+                        y: {
+                            type: 'linear',
+                            display: true,
+                            position: 'left',
+                            title: {
+                                display: true,
+                                text: '사고 건수 (건)',
+                                font: { family: "'Pretendard', sans-serif", size: 12 }
+                            },
+                            grid: { borderDash: [4, 4], color: '#f1f5f9' },
+                            min: 0,
+                            max: 250000
+                        },
+                        y1: {
+                            type: 'linear',
+                            display: true,
+                            position: 'right',
+                            title: {
+                                display: true,
+                                text: '사고 비율 (%)',
+                                font: { family: "'Pretendard', sans-serif", size: 12 }
+                            },
+                            grid: { drawOnChartArea: false },
+                            min: 0,
+                            max: 30
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
