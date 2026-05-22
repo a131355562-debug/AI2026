@@ -43,7 +43,7 @@
                 <span class="text-[#527853]">시민 중심의 혁신 콘텐츠 기획안</span>
             </h1>
             <p class="text-base md:text-lg text-slate-600 max-w-2xl mx-auto font-light">
-                KBS 뉴스 보도의 거시 지표와 실제 부산 거주민·방문객들의 유튜브 생생 댓글 데이터를 교차 분석하여 체감형 대안을 제시합니다.
+                KBS 뉴스 보도의 성과 및 거시 지표와 실제 부산 거주민들의 유튜브 댓글 데이터를 정성 교차 분석하여 진정한 로컬 체감 대안을 도출합니다.
             </p>
         </div>
         <!-- 파스텔 데코 구체 -->
@@ -57,7 +57,7 @@
             <div class="flex justify-start md:justify-center overflow-x-auto space-x-6 py-4 no-scrollbar">
                 <button onclick="switchTab('analysis')" id="tab-analysis" class="tab-active px-3 py-1 flex items-center space-x-2 text-sm md:text-base font-medium transition whitespace-nowrap">
                     <i data-lucide="bar-chart-2" class="w-4 h-4 text-emerald-600"></i>
-                    <span>보도 vs 댓글 교차 분석</span>
+                    <span>보도 요약 & 댓글 교차 비교</span>
                 </button>
                 <button onclick="switchTab('growth')" id="tab-growth" class="text-slate-500 hover:text-slate-800 px-3 py-1 flex items-center space-x-2 text-sm md:text-base font-medium transition whitespace-nowrap">
                     <i data-lucide="trending-up" class="w-4 h-4 text-blue-500"></i>
@@ -78,11 +78,45 @@
     <!-- 메인 콘텐츠 컨테이너 -->
     <main class="max-w-6xl mx-auto px-4 py-10">
 
-        <!-- TAB 1: 보도 vs 댓글 교차 분석 -->
+        <!-- TAB 1: 보도 요약 & 댓글 교차 비교 -->
         <section id="content-analysis" class="space-y-10">
-            <div class="text-center max-w-2xl mx-auto">
-                <h2 class="text-2xl md:text-3xl font-bold text-slate-800">미디어가 비춘 부산 vs 시민이 숨쉬는 부산</h2>
-                <p class="text-slate-500 mt-2">KBS 보도 영상의 프레임과 현지 거주민들의 생생한 지적이 다른 점을 확인해 보세요.</p>
+            
+            <!-- 뉴스 보도 핵심 브리핑 카드 -->
+            <div class="bg-gradient-to-r from-[#EBF1F5] to-[#F1F5F9] rounded-3xl p-6 md:p-8 border border-slate-200 shadow-sm">
+                <div class="flex items-center space-x-2 text-blue-800 mb-4">
+                    <i data-lucide="play-circle" class="w-6 h-6 animate-pulse"></i>
+                    <span class="text-xs font-bold uppercase tracking-widest">KBS 보도 내용 핵심 요약</span>
+                </div>
+                <h3 class="text-xl md:text-2xl font-extrabold text-slate-800 mb-4">부산 외국인 관광객 300만 시대와 '1조원 돌파'의 쾌거</h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                    <div class="bg-white/80 backdrop-blur p-4 rounded-xl border border-blue-100">
+                        <div class="text-xs text-slate-400 font-bold">외국인 관광객 규모</div>
+                        <div class="text-2xl font-extrabold text-blue-700 mt-1">300만 명 돌파</div>
+                        <p class="text-xs text-slate-500 mt-1">사상 처음으로 연간 외국인 방문자 수 최고점 경신</p>
+                    </div>
+                    <div class="bg-white/80 backdrop-blur p-4 rounded-xl border border-blue-100">
+                        <div class="text-xs text-slate-400 font-bold">외국인 연간 지출액</div>
+                        <div class="text-2xl font-extrabold text-emerald-700 mt-1">잠정 1조 원 돌파</div>
+                        <p class="text-xs text-slate-500 mt-1">전년 대비 32.4% 성장, 실질적인 '체류형 돈 쓰는 관광지' 정착</p>
+                    </div>
+                    <div class="bg-white/80 backdrop-blur p-4 rounded-xl border border-blue-100">
+                        <div class="text-xs text-slate-400 font-bold">도시 경쟁력 순위</div>
+                        <div class="text-2xl font-extrabold text-purple-700 mt-1">전국 2위 (인천 추월)</div>
+                        <p class="text-xs text-slate-500 mt-1">인천공항 허브 배후를 제치고 서울 바로 아래 2위 상권 등극</p>
+                    </div>
+                </div>
+
+                <p class="text-sm text-slate-600 leading-relaxed">
+                    본 보도 영상은 부산이 <strong>타이완(대만) 관광객 5명 중 1명 꼴로 핵심 견인</strong>, 한국산 이불 쇼핑, 돼지국밥 호감도 및 전통시장의 이색 맛집 유행 등에 힘입어 폭발적으로 성장하고 있음을 알렸습니다. 하지만 동시에 <u>도시철도 및 소비 데이터를 근거로 특정 도심권에만 관광이 집중되는 '쏠림 및 도시 불균형 문제' 또한 비중 있게 다루었습니다.</u>
+                </p>
+            </div>
+
+            <!-- 대조 영역 타이틀 -->
+            <div class="text-center max-w-2xl mx-auto pt-4">
+                <div class="inline-block px-3 py-1 bg-amber-50 text-amber-800 rounded-full text-xs font-semibold mb-2">보도와 실제 여론 대조</div>
+                <h2 class="text-2xl md:text-3xl font-bold text-slate-800">미디어가 분석한 우려 vs 시민들이 말하는 진실</h2>
+                <p class="text-slate-500 mt-2">KBS 보도 영상의 지적 프레임과 현지 거주민들이 느끼는 실제 생활 인구의 격차를 확인해보세요.</p>
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -93,14 +127,14 @@
                             <span class="p-2 bg-blue-100 text-blue-700 rounded-lg">
                                 <i data-lucide="tv" class="w-5 h-5"></i>
                             </span>
-                            <h3 class="font-bold text-slate-800">KBS 뉴스 보도 핵심 논조</h3>
+                            <h3 class="font-bold text-slate-800">KBS 보도진의 지적사항</h3>
                         </div>
-                        <span class="text-xs bg-blue-50 text-blue-600 font-semibold px-2.5 py-1 rounded">언론 보도</span>
+                        <span class="text-xs bg-blue-50 text-blue-600 font-semibold px-2.5 py-1 rounded">보도 프레임</span>
                     </div>
                     <div class="p-6 space-y-4">
                         <div class="p-4 bg-slate-50 rounded-xl">
                             <p class="text-xs font-semibold text-slate-400">데이터 근거</p>
-                            <p class="text-sm font-medium text-slate-700 mt-1">도시철도 외국어 발매율 및 외국인 신용카드 매출 집계 활용</p>
+                            <p class="text-sm font-medium text-slate-700 mt-1">도시철도 다국어 자동 발매기 구매율 및 주요 상권 신용카드 매출</p>
                         </div>
                         <div class="space-y-3 text-slate-600 text-sm">
                             <div class="flex items-start space-x-3">
@@ -109,11 +143,11 @@
                             </div>
                             <div class="flex items-start space-x-3">
                                 <i data-lucide="alert-circle" class="w-5 h-5 text-red-400 shrink-0 mt-0.5"></i>
-                                <p><strong>서면 관광지 오인:</strong> 서면역 승차권 구매 데이터를 바탕으로 서면을 주요 ‘외국인 관광 쏠림지’로 분류.</p>
+                                <p><strong>서면 관광지 오인:</strong> 서면역 지하철 외국어 승차권 구매율 상위 데이터만을 근거로 서면을 주요 ‘외국인 관광 쏠림지’로 성격 규정.</p>
                             </div>
                             <div class="flex items-start space-x-3">
                                 <i data-lucide="alert-circle" class="w-5 h-5 text-red-400 shrink-0 mt-0.5"></i>
-                                <p><strong>구도심·해안 중심 보도:</strong> 해운대, 광안리, 전통시장(국제시장, 해운대시장) 위주의 조명.</p>
+                                <p><strong>구도심·해안 중심 보도:</strong> 해운대, 광안리, 전통시장(국제시장, 해운대시장) 위주의 정형화된 공간 분석 조명.</p>
                             </div>
                         </div>
                     </div>
@@ -128,7 +162,7 @@
                             </span>
                             <h3 class="font-bold text-slate-800">부산 주민 & 시청자 실제 체감</h3>
                         </div>
-                        <span class="text-xs bg-amber-50 text-amber-700 font-semibold px-2.5 py-1 rounded">여론 분석</span>
+                        <span class="text-xs bg-amber-50 text-amber-700 font-semibold px-2.5 py-1 rounded">현장 여론</span>
                     </div>
                     <div class="p-6 space-y-4">
                         <div class="p-4 bg-slate-50 rounded-xl">
@@ -138,7 +172,7 @@
                         <div class="space-y-3 text-slate-600 text-sm">
                             <div class="flex items-start space-x-3">
                                 <i data-lucide="check-circle-2" class="w-5 h-5 text-emerald-500 shrink-0 mt-0.5"></i>
-                                <p><strong>서면 유동인구 1위의 진실:</strong> 서면 상권은 단순 외국인 관광객 쏠림이 아닌, 부산·경남(김해, 양산, 거제 등) 전역의 <u>로컬 청년 유동인구가 집중되는 단핵화 현상</u>임.</p>
+                                <p><strong>서면 유동인구 1위의 진실:</strong> 서면 상권은 단순 외국인 관광객 쏠림이 아닌, 부산·경남(김해, 양산, 거제 등) 전역의 <u>로컬 청년 유동인구가 집중되는 광역 단핵화 생활밀착 현상</u>임.</p>
                             </div>
                             <div class="flex items-start space-x-3">
                                 <i data-lucide="check-circle-2" class="w-5 h-5 text-emerald-500 shrink-0 mt-0.5"></i>
@@ -252,26 +286,26 @@
         <section id="content-proposals" class="hidden space-y-10">
             <div class="text-center max-w-2xl mx-auto">
                 <h2 class="text-2xl md:text-3xl font-bold text-slate-800">부산시 관광 활성화를 위한 신규 기획안</h2>
-                <p class="text-slate-500 mt-2">도시 쏠림 현상을 극복하고, 시민들의 실제 의견과 기후 강점을 녹여낸 4대 전략적 콘텐츠 기획</p>
+                <p class="text-slate-500 mt-2">MZ세대와 트렌드 칩스터들을 부산으로 미치게 할 파격적이고 유니크한 4가지 공간·행사 융합 투어</p>
             </div>
 
             <!-- 기획안 선택 카드 컨트롤러 (그리드 형태) -->
             <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
                 <button onclick="setActiveProposal(1)" id="prop-btn-1" class="border-2 border-emerald-500/20 bg-emerald-50/40 p-4 rounded-xl text-left transition duration-200 shadow-sm">
-                    <span class="text-[10px] font-bold text-emerald-700 uppercase tracking-widest block mb-1">전략 1 · 상권 맞춤</span>
-                    <h4 class="font-bold text-slate-800 text-sm md:text-base">청년 크리에이티브 전포 스페이스</h4>
+                    <span class="text-[10px] font-bold text-purple-700 uppercase tracking-widest block mb-1">전략 1 · 서브컬처</span>
+                    <h4 class="font-bold text-slate-800 text-sm md:text-base">부산 코스프레 & 서브컬처 로드 페스티벌</h4>
                 </button>
                 <button onclick="setActiveProposal(2)" id="prop-btn-2" class="border-2 border-slate-100 bg-white p-4 rounded-xl text-left transition duration-200 hover:border-slate-300">
-                    <span class="text-[10px] font-bold text-sky-700 uppercase tracking-widest block mb-1">전략 2 · 지역 분산</span>
-                    <h4 class="font-bold text-slate-800 text-sm md:text-base">서부산 에코 낙동강 트랙</h4>
+                    <span class="text-[10px] font-bold text-sky-700 uppercase tracking-widest block mb-1">전략 2 · 단기 레저</span>
+                    <h4 class="font-bold text-slate-800 text-sm md:text-base">윈터 선셋 바이브 & 나이트 런 클럽</h4>
                 </button>
                 <button onclick="setActiveProposal(3)" id="prop-btn-3" class="border-2 border-slate-100 bg-white p-4 rounded-xl text-left transition duration-200 hover:border-slate-300">
-                    <span class="text-[10px] font-bold text-indigo-700 uppercase tracking-widest block mb-1">전략 3 · 기후 활용</span>
-                    <h4 class="font-bold text-slate-800 text-sm md:text-base">윈터 무빙판 안심 한달살기</h4>
+                    <span class="text-[10px] font-bold text-orange-700 uppercase tracking-widest block mb-1">전략 3 · 미식 힙스터</span>
+                    <h4 class="font-bold text-slate-800 text-sm md:text-base">전포 푸드 랩 & 로컬 브루어리 버스 홉핑</h4>
                 </button>
                 <button onclick="setActiveProposal(4)" id="prop-btn-4" class="border-2 border-slate-100 bg-white p-4 rounded-xl text-left transition duration-200 hover:border-slate-300">
-                    <span class="text-[10px] font-bold text-amber-700 uppercase tracking-widest block mb-1">전략 4 · 신뢰 유지</span>
-                    <h4 class="font-bold text-slate-800 text-sm md:text-base">부기 안심 정찰제 & 푸드 루트</h4>
+                    <span class="text-[10px] font-bold text-indigo-700 uppercase tracking-widest block mb-1">전략 4 · 액티비티</span>
+                    <h4 class="font-bold text-slate-800 text-sm md:text-base">영도 해무(海霧) 아웃도어 미스터리 퀘스트</h4>
                 </button>
             </div>
 
@@ -280,16 +314,16 @@
                 <!-- 동적으로 변경될 영역 -->
                 <div class="flex flex-col lg:flex-row lg:items-center justify-between border-b border-slate-100 pb-6 mb-8 gap-4">
                     <div>
-                        <div id="prop-badge" class="inline-block px-3 py-1 bg-emerald-100 text-emerald-800 rounded-full text-xs font-bold mb-3">
-                            상권 맞춤형 정책
+                        <div id="prop-badge" class="inline-block px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-xs font-bold mb-3">
+                            MICE 및 서브컬처 연계
                         </div>
                         <h3 id="prop-title" class="text-2xl md:text-3xl font-extrabold text-slate-800">
-                            청년 크리에이티브 전포 스페이스 (Jeonpo Youth Creative Zone)
+                            부산 코스프레 & 서브컬처 로드 페스티벌 (Busan Subculture & Cosplay Street Week)
                         </h3>
                     </div>
                     <div class="flex items-center space-x-3 text-slate-500 text-sm shrink-0">
-                        <span class="flex items-center"><i data-lucide="map-pin" class="w-4 h-4 mr-1"></i> <span id="prop-target">전포동~부전동 일대</span></span>
-                        <span class="flex items-center"><i data-lucide="users-2" class="w-4 h-4 mr-1"></i> <span id="prop-audience">로컬 청년 & 트렌드 관광객</span></span>
+                        <span class="flex items-center"><i data-lucide="map-pin" class="w-4 h-4 mr-1"></i> <span id="prop-target">벡스코(BEXCO), 마린시티, 영도 흰여울길 일대</span></span>
+                        <span class="flex items-center"><i data-lucide="users-2" class="w-4 h-4 mr-1"></i> <span id="prop-audience">MZ세대 서브컬처 팬덤, 국내외 코스플레이어</span></span>
                     </div>
                 </div>
 
@@ -297,66 +331,66 @@
                     <!-- 상세 기획 설명 -->
                     <div class="space-y-6">
                         <div>
-                            <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">기획 배경 (현 주민체감기반 분석)</h4>
+                            <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">기획 배경 (덕후 문화와 도시 비주얼의 결합)</h4>
                             <p id="prop-background" class="text-slate-600 text-sm leading-relaxed">
-                                언론 보도에서는 '서면'을 외국 관광객 쏠림 지역으로 지적했으나, 사실 이곳은 부산과 인근 김해·양산 청년들이 밀집하는 대표적인 '내국인 로컬 중심지'입니다. 무분별한 해외 인프라 개발 대신, 로컬 문화를 체험하려는 외국인과 내국 청년이 상생할 수 있는 '크리에이티브 타운' 성격의 마케팅이 절실합니다.
+                                매회 수만 명이 몰리는 '부산 코믹월드'나 글로벌 게임 축제 '지스타(G-STAR)' 기간 동안, 참가자들이 실내 행사장에만 갇혀 있는 아쉬움이 컸습니다. 부산의 마천루 빌딩숲(마린시티), 그리스풍 바다 절벽(흰여울문화마을) 등 강력한 이국적 야외 풍경을 살려 전 세계 코스플레이어들이 인생샷을 남길 수 있는 야외 포토제닉 스트리트 축제로 공간을 영리하게 확장합니다.
                             </p>
                         </div>
                         <div>
                             <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">핵심 프로그램 (Core Program)</h4>
                             <ul id="prop-programs" class="space-y-3 text-sm text-slate-600">
                                 <li class="flex items-start space-x-2">
-                                    <i data-lucide="check" class="w-5 h-5 text-emerald-500 shrink-0"></i>
-                                    <span><strong>로컬 크리에이터 팝업 스퀘어:</strong> 부산 청년 브랜드들의 수공예품, 독창적인 소품 매장을 연결하는 연중무휴 아트 스페이스</span>
+                                    <i data-lucide="check" class="w-5 h-5 text-purple-500 shrink-0"></i>
+                                    <span><strong>덕후들을 위한 '시티 야외 셔틀 포토 버스' 서비스:</strong> 코믹월드 및 지스타 입장권 소지자를 대상으로 마린시티 야경, 흰여울 골목, 감천문화마을 등 최적의 사진 촬영 스팟만 순환하는 리무진 버스 노선 구축</span>
                                 </li>
                                 <li class="flex items-start space-x-2">
-                                    <i data-lucide="check" class="w-5 h-5 text-emerald-500 shrink-0"></i>
-                                    <span><strong>전포 카페 테마 로드 패키지:</strong> 서면 2번가와 전포 사잇길의 개인 카페 브랜드를 바우처 형식으로 결합해 트렌디한 도심 카페 탐방 경험 제공</span>
+                                    <i data-lucide="check" class="w-5 h-5 text-purple-500 shrink-0"></i>
+                                    <span><strong>광안대교 LED 코스프레 런웨이 패레이드:</strong> 밤 시간대 광안리 해변 도로를 전면 통제하고, 국내외 유명 게스트들과 아마추어 코스어들이 전면 등장하는 힙한 일렉트로닉 스트리트 댄스 패레이드 개최</span>
                                 </li>
                                 <li class="flex items-start space-x-2">
-                                    <i data-lucide="check" class="w-5 h-5 text-emerald-500 shrink-0"></i>
-                                    <span><strong>스트리트 아트 프로젝트:</strong> 골목 곳곳에 부산을 테마로 한 현대 미술, 포토제닉 월을 조성하여 MZ 세대 취향의 아웃도어 갤러리화</span>
+                                    <i data-lucide="check" class="w-5 h-5 text-purple-500 shrink-0"></i>
+                                    <span><strong>서브컬처 로컬 소상공인 쿠폰 제휴 (덕질 세일즈):</strong> 전포동 피규어/애니메 굿즈샵, 서브컬처 컨셉 카페 등과 부산 관광 패스를 연동하여 팬덤 소비를 구도심 내부로 직접 유입</span>
                                 </li>
                             </ul>
                         </div>
                     </div>
 
                     <!-- 기대 효과 및 도식 이미지 영역 -->
-                    <div class="bg-gradient-to-br from-slate-50 to-[#ECEFF3] rounded-2xl p-6 flex flex-col justify-between">
+                    <div class="bg-gradient-to-br from-[#F5F3FF] to-[#EDE9FE] rounded-2xl p-6 flex flex-col justify-between">
                         <div>
                             <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">프로젝트 기대효과 및 로드맵</h4>
                             <div class="space-y-4">
                                 <div class="bg-white/80 backdrop-blur p-3.5 rounded-xl border border-slate-100 flex items-center space-x-3">
-                                    <span class="p-2 bg-emerald-100 text-emerald-700 rounded-lg shrink-0">
-                                        <i data-lucide="dollar-sign" class="w-4 h-4"></i>
+                                    <span class="p-2 bg-purple-100 text-purple-700 rounded-lg shrink-0">
+                                        <i data-lucide="sparkles" class="w-4 h-4"></i>
                                     </span>
                                     <div>
-                                        <h5 class="font-bold text-slate-800 text-xs">지역 경제 선순환</h5>
-                                        <p class="text-[11px] text-slate-500">외국인 유입에 따른 로컬 카페/소품샵 소상공인 매출 30% 증대 효과</p>
+                                        <h5 class="font-bold text-slate-800 text-xs">글로벌 팬덤 성지 포지셔닝</h5>
+                                        <p class="text-[11px] text-slate-500">지스타, 부코 기간 외에도 아시아 서브컬처 팬들이 비행기 타고 방문하는 '한국의 아키하바라 해안 버전' 브랜딩</p>
+                                    </div>
+                                </div>
+                                <div class="bg-white/80 backdrop-blur p-3.5 rounded-xl border border-slate-100 flex items-center space-x-3">
+                                    <span class="p-2 bg-pink-100 text-pink-700 rounded-lg shrink-0">
+                                        <i data-lucide="instagram" class="w-4 h-4"></i>
+                                    </span>
+                                    <div>
+                                        <h5 class="font-bold text-slate-800 text-xs">자발적 SNS 바이럴 폭발</h5>
+                                        <p class="text-[11px] text-slate-500">부산의 비주얼과 코스프레 이미지가 틱톡, 인스타그램 릴스를 통해 전 세계 소셜 미디어로 자발적 노출 및 바이럴</p>
                                     </div>
                                 </div>
                                 <div class="bg-white/80 backdrop-blur p-3.5 rounded-xl border border-slate-100 flex items-center space-x-3">
                                     <span class="p-2 bg-blue-100 text-blue-700 rounded-lg shrink-0">
-                                        <i data-lucide="globe" class="w-4 h-4"></i>
+                                        <i data-lucide="map" class="w-4 h-4"></i>
                                     </span>
                                     <div>
-                                        <h5 class="font-bold text-slate-800 text-xs">글로벌 도시 브랜딩</h5>
-                                        <p class="text-[11px] text-slate-500">정형화된 '해변 도시'에서 벗어나 독특하고 트렌디한 '아시아 청년 문화 수도' 포지셔닝</p>
-                                    </div>
-                                </div>
-                                <div class="bg-white/80 backdrop-blur p-3.5 rounded-xl border border-slate-100 flex items-center space-x-3">
-                                    <span class="p-2 bg-purple-100 text-purple-700 rounded-lg shrink-0">
-                                        <i data-lucide="shuffle" class="w-4 h-4"></i>
-                                    </span>
-                                    <div>
-                                        <h5 class="font-bold text-slate-800 text-xs">관광 인구의 점진적 분산</h5>
-                                        <p class="text-[11px] text-slate-500">관광 핵심 밀집지(해운대)에 쏠린 외국인의 발길을 내륙 상권으로 자연스럽게 분배</p>
+                                        <h5 class="font-bold text-slate-800 text-xs">벡스코 너머의 구도심 소비 촉진</h5>
+                                        <p class="text-[11px] text-slate-500">해운대 벡스코 행사 공간에 머무는 대규모 1020 유동인구를 영도, 전포 등 구도심으로 적극 유입시켜 경제 활성화</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="mt-6 pt-4 border-t border-slate-200 text-center text-xs text-slate-400 font-semibold">
-                            추진 주체: 부산광역시 관광기획과 · 전포공구길 상인연합회 협동조합
+                            추진 주체: 부산문화재단 · 한국게임산업협회 · 코믹월드 연합 TF
                         </div>
                     </div>
                 </div>
@@ -492,71 +526,71 @@
             }
         ];
 
-        // 2. 관광 기획안 데이터베이스
+        // 2. 관광 기획안 데이터베이스 (MZ 타겟 & 힙스터 4대 테마 전면 리뉴얼!)
         const proposalsData = {
             1: {
-                badge: "상권 맞춤형 정책 (서면/전포)",
-                title: "청년 크리에이티브 전포 스페이스 (Jeonpo Youth Creative Zone)",
-                target: "전포동~부전동 일대",
-                audience: "로컬 청년 & 트렌드 관광객",
-                background: "언론 보도에서는 '서면'을 외국 관광객 쏠림 지역으로 지적했으나, 사실 이곳은 부산과 인근 김해·양산 청년들이 밀집하는 대표적인 '내국인 로컬 중심지'입니다. 무분별한 해외 인프라 개발 대신, 로컬 문화를 체험하려는 외국인과 내국 청년이 상생할 수 있는 '크리에이티브 타운' 성격의 마케팅이 절실합니다.",
+                badge: "서브컬처 & MICE 연계 정책",
+                title: "부산 코스프레 & 서브컬처 로드 페스티벌 (Busan Subculture Street)",
+                target: "벡스코(BEXCO), 마린시티, 영도 흰여울마을 일대 야외 노선",
+                audience: "국내외 MZ세대 애니메·게임 팬덤, 인플루언서",
+                background: "매해 수만 명이 몰리는 '부산 코믹월드'나 글로벌 게임 축제 '지스타(G-STAR)' 기간 동안, 참가자들이 실내 행사장에만 갇혀 있는 아쉬움이 컸습니다. 부산의 마천루 빌딩숲(마린시티), 그리스풍 바다 절벽(흰여울문화마을) 등 강력한 이국적 야외 풍경을 살려 전 세계 코스플레이어들이 인생샷을 남길 수 있는 야외 포토제닉 스트리트 축제로 공간을 영리하게 확장합니다.",
                 programs: [
-                    "<strong>로컬 크리에이터 팝업 스퀘어:</strong> 부산 청년 브랜드들의 수공예품, 독창적인 소품 매장을 연결하는 연중무휴 아트 스페이스",
-                    "<strong>전포 카페 테마 로드 패키지:</strong> 서면 2번가와 전포 사잇길의 개인 카페 브랜드를 바우처 형식으로 결합해 트렌디한 도심 카페 탐방 경험 제공",
-                    "<strong>스트리트 아트 프로젝트:</strong> 골목 곳곳에 부산을 테마로 한 현대 미술, 포토제닉 월을 조성하여 MZ 세대 취향의 아웃도어 갤러리화"
+                    "<strong>'덕후 전용' 야외 서틀 포토 버스:</strong> 축제 기간 중 입장권 소지자 한정, 코스프레 복장 전용으로 마린시티 해안가 및 흰여울마을 포토스팟을 운행하는 순환 테마 버스",
+                    "<strong>광안리 스트리트 EDM 코스프레 패레이드:</strong> 밤 시간 광안리 해변 도로를 전면 통제하고, 전 세계 코스플레이어들과 인플루언서들이 DJ 비트에 맞춰 런웨이를 펼치는 야간 테마 로드 패레이드",
+                    "<strong>서면 전포동 '오타쿠 맵' 마케팅 제휴:</strong> 전포동의 힙한 피규어샵, 애니메 굿즈 전문점, 캐릭터 컨셉 카페 등과 비짓 부산 패스를 결합하여 실질적인 소비를 원도심 소상공인에게 직결"
                 ],
-                effect_1: "지역 경제 선순환: 외국인 유입에 따른 로컬 카페/소품샵 소상공인 매출 30% 증대 효과",
-                effect_2: "글로벌 도시 브랜딩: 정형화된 '해변 도시'에서 벗어나 독특하고 트렌디한 '아시아 청년 문화 수도' 포지셔닝",
-                effect_3: "관광 인구의 점진적 분산: 관광 핵심 밀집지(해운대)에 쏠린 외국인의 발길을 내륙 상권으로 자연스럽게 분배",
-                color: "emerald"
+                effect_1: "글로벌 팬덤 성지 포지셔닝: 단순 전시 행사를 넘어 도시 전체가 '한국의 아키하바라 해안 버전'으로 글로벌 힙스터들에게 각인",
+                effect_2: "자발적 소셜 바이럴 폭발: 참가자들이 마린시티 야경과 영도 바다를 배경으로 촬영한 숏폼 콘텐츠가 틱톡, 인스타 릴스를 통해 전세계에 오가닉하게 확산",
+                effect_3: "공간적 분산의 자연적 성취: 해운대 벡스코 실내에 정체된 대규모 1020 인구를 부산 구도심 및 자연 경관지로 자연스럽게 분산 이동시킴",
+                color: "purple"
             },
             2: {
-                badge: "지역 균형/분산 정책 (서부산)",
-                title: "서부산 에코 낙동강 트랙 (West Busan Eco-Nakdong Track)",
-                target: "다대포, 을숙도, 낙동강변 생태공원 일대",
-                audience: "가족 단위 관광객 및 자연/아웃도어 선호 서구권 외국인",
-                background: "댓글 여론 중 '낙동강' 등 수려한 서부산 자연환경에 대한 강한 자부심과 추천 욕구가 가시적으로 확인되었습니다. 기존의 복잡한 해운대·광안리 해수욕장에 편중된 해양 레저 위주 관광에서 탈피해 생태적 힐링 자원을 발굴하여 서부산권으로 동선을 강력 유도해야 합니다.",
+                badge: "겨울 기후 활용 단기 액티비티 정책",
+                title: "윈터 선셋 바이브 & 나이트 런 클럽 (Busan Sunset & Night Run Festival)",
+                target: "광안리 해변로 ~ 센텀시티 ~ 수영강변 코스",
+                audience: "아웃도어·러닝 크루 활동을 즐기는 2030 직장인 및 외국인 러너",
+                background: "댓글 여론에서 시민들이 강력 추천한 '겨울에도 눈이 오지 않고 빙판길이 없는 축복의 기후'를 활용하되, 지루한 장기 체류가 아닌 주말 1박 2일 혹은 2박 3일 동안 힙하게 즐기는 단기 러닝 페스티벌 콘텐츠입니다. 영하로 떨어지는 매서운 내륙 겨울 추위를 피해, 바닷바람과 노을을 가르며 달리는 겨울철 국내 유일의 '안심 아웃도어 러닝' 경험을 제공합니다.",
                 programs: [
-                    "<strong>을숙도 갈대밭 철새 탐조 아웃도어 패스:</strong> 자전거 대여와 생태 에코센터 투어를 결합하여 외국인 전용 오디오 가이드를 지원하는 아날로그 감성 투어",
-                    "<strong>다대포 낙조 & 낙동강 크루즈 세일링:</strong> 한국의 가장 수려한 석양으로 꼽히는 다대포 낙조와 낙동강 하구를 연결하는 프리미엄 소형 크루즈선 운영",
-                    "<strong>생태 친화 웰니스 요가 캠프:</strong> 낙동강변 삼락생태공원을 거점으로 한 주말 웰니스 요가 및 힐링 걷기 명상 대회 개최"
+                    "<strong>광안리 선셋 비치 요가 & 디제잉 런:</strong> 해 질 무렵 광안리 바스락 백사장에서 가벼운 스트레칭 요가 후, 야광 바디페인팅을 한 채 해안 도로 5K 코스를 일렉 디제잉 사운드트랙과 함께 라이브 러닝",
+                    "<strong>겨울 야간 노상 포장마차 '러너스 나이트':</strong> 러닝이 끝난 피니시 라인(광안리/수영강)에 정갈한 가성비 부산 어묵, 물떡 등 겨울철 부산 최고 미식을 따뜻하게 뷔페식으로 체험하는 네트워킹 애프터파티",
+                    "<strong>빙판길 제로 주말 로드 트립 패키지:</strong> 윈터 액티비티 바우처 및 스포츠 선글라스 굿즈, 주요 바닷가 뷰 숙박 1박을 결합한 주말 집중 웰니스 익스프레스 티켓 판매"
                 ],
-                effect_1: "지역 격차 해소: 동-서부산 관광 불균형 문제를 해소하고 서부산 로컬 경제에 경제적 낙수효과 촉진",
-                effect_2: "지속가능 자연 테마: 단순 인공 랜드마크 대신 환경 보존과 관광이 조화를 이루는 고부가가치 친환경 관광 기틀 마련",
-                effect_3: "관광객 밀도 완화: 성수기 해운대 해변 혼잡도를 분산시켜 전반적인 도시 관광 체감 평점 대폭 향상",
+                effect_1: "비수기 겨울 시즌 타개: 다른 지역은 엄두도 못 내는 겨울 아웃도어 액티비티를 부산의 독보적 날씨 경쟁력으로 무장하여 단기 여행 패키지 판매 극대화",
+                effect_2: "2030 웰니스 라이프스타일 흡수: 건강한 스포츠 라이프와 힙한 파티 문화를 함께 소비하는 현대 젊은이들의 취향을 완벽히 관통",
+                effect_3: "관광 경제 집중도 분산: 센텀과 광안리 일대 도로 통제 및 제휴를 통해 내외국인 청년들이 안전하게 머물고 어울리는 주말 경제 창출",
                 color: "sky"
             },
             3: {
-                badge: "기후 조건 활용 정책",
-                title: "윈터 무빙판 안심 한달살기 (Busan Cozy Winter Long-Stay)",
-                target: "부산 전역 레지던스 및 한달살기 제휴 하우스",
-                audience: "추운 지역에 거주하는 외국인(북미, 일본 북부 등) 및 국내 타 시도 디지털 노마드",
-                background: "부산 시민들은 겨울철에도 눈이 오지 않고 빙판길 걱정이 없어 차를 몰기 편하며, 봄꽃이 빨리 피는 온화한 '기후적 축복'을 강력한 강점으로 인지하고 있습니다. 이러한 기후 조건을 겨울철 비수기를 타개할 '워케이션' 및 '장기 스테이'의 최고 핵심 가치로 세일즈하는 전략입니다.",
+                badge: "로컬 미식 & 청년 상권 활성화 정책",
+                title: "전포 푸드 랩 & 로컬 브루어리 버스 홉핑 (Hop-on Hop-off Brew Tour)",
+                target: "전포동 카페거리, 부전동, 온천장 등 부산 고유 소형 브루어리 거점",
+                audience: "수제 맥주 매니아, 힙한 미식 투어를 선호하는 트렌드 세터",
+                background: "서면·전포동이 단순 외국인 쏠림지가 아니라 실제 부산 로컬 젊은이들이 상권을 창조해 나가는 살아있는 심장이라는 댓글 팩트에 착안했습니다. 이 지역의 개성 넘치는 미식 편집샵들과 부산 곳곳에 숨어 있는 실력파 수제 맥주 양조장(브루어리)들을 버스 노선 하나로 가볍게 '홉핑(Hop-on, Hop-off)'하며 즐기는 신개념 단기 미식 크롤링 기획입니다.",
                 programs: [
-                    "<strong>'눈 없는 겨울, 가볍게 달리는 부산' 워케이션 패키지:</strong> 겨울철 야외 러닝, 바다 서핑, 도심 야간 안전 워킹 코스 맵과 연동된 숙박 할인 지원 프로그램",
-                    "<strong>빙판길 제로(Zero-Icy) 장기 렌터카 바우처:</strong> 한달 살기 체류 외국인 및 은퇴자를 위해 무빙판길 안심 주행 렌터카 제휴 할인 및 주요 도로 안전 드라이빙 가이드북 배포",
-                    "<strong>조기 봄맞이 테마 위크:</strong> 전국에서 가장 빨리 벚꽃과 매화가 개화하는 부산의 이점을 적극 홍보, 2월부터 시작되는 꽃놀이 테마 페스티벌 전개"
+                    "<strong>부산 브루어리 버스 투어 (Beer-Hop Bus):</strong> 전포동을 시작으로 광안리, 온천장 등 매력적인 부산의 수제 맥주 펍과 양조장을 무제한 자유 승하차하며 샘플러를 맛보는 단기 미식 버스 크루즈",
+                    "<strong>전포동 푸드 랩 '로컬 셰프 배틀 콜라보':</strong> 돼지국밥 국물 베이스의 라멘, 대만인 설문 1위인 명란김밥을 현대적으로 재해석한 아시안 타파스 등 청년 요리사들의 팝업 요리 시식권 제공",
+                    "<strong>마이 홈 브루잉 마스터 클래스:</strong> 수제맥주 양조장 내부 투어는 물론, 부산 갈매기를 형상화한 전용 홉 맥주 캔을 본인이 직접 커스터마이징 디자인하여 패키징해가는 체험형 키트"
                 ],
-                effect_1: "겨울철 비수기 실종: 전통적인 관광 비수기인 12월~2월의 관광 수익 및 장기 투숙률을 최고 45%까지 끌어올림",
-                effect_2: "정량적 장기 체류 확립: 단순 스쳐 지나가는 단기(1~2일) 관광지에서 '살아보고 스며드는 장기 거주형 도시'로 구조 혁신",
-                effect_3: "디지털 노마드 특구 육성: 글로벌 워케이션 비자 발급 외국인의 집중 유입으로 다문화 활력 제공",
-                color: "indigo"
+                effect_1: "서면-전포의 실질적 로컬화: 정체 모를 획일적 외국인 관광 상업화가 아닌, 부산만의 오리지널 '청년 크래프트 맥주·미식' 중심지로서 깊이 있는 브랜딩",
+                effect_2: "대만·아시아 미식 매니아 공략: 돼지국밥, 명란 등 오리지널 로컬 푸드의 레벨업 버전을 소개함으로써 미식 탐방 만족도 수직 상승",
+                effect_3: "체류 소비 유도: 수제맥주 투어를 통해 자연스럽게 단기 여행객들의 야간 소비 및 골목 상권 도보 체류 시간을 안정적으로 확보",
+                color: "orange"
             },
             4: {
-                badge: "소비 신뢰 증대 정책 (전통시장)",
-                title: "부기 안심 정찰제 & 로컬 푸드 트랙 (Boogi's Honest Food Route)",
-                target: "부전시장, 국제시장, 자갈치시장 등 부산 전역 전통시장",
-                audience: "전통시장 바가지 요금을 우려하는 외국인 자유 여행객",
-                background: "최근 전국 단위 전통시장의 '바가지 요금 논란'에 대해 부산 시민들은 강력한 방어 심리('부산에는 바가지 없다')를 발동하고 있습니다. 이 자부심과 신뢰를 제도적으로 공고히 해 해외 주요 맛집 채널에 선제적으로 신뢰 상징을 노출함으로써 부산 안심 상권을 글로벌 브랜드로 정착시킵니다.",
+                badge: "구도심 자연 융합 액티비티 정책",
+                title: "영도 해무(海霧) 아웃도어 미스터리 퀘스트 (Yongdo Fog-Mystery AR Cart Quest)",
+                target: "영도구 깡깡이예술마을, 청학동 고개, 해안 터널 일대",
+                audience: "방탈출 매니아, 게이머, 독창적인 탐험을 즐기는 MZ세대",
+                background: "단순히 경관만 휙 보고 가는 뻔한 '영도 흰여울마을 인증샷 투어'의 수명 한계를 뛰어넘기 위한 전략입니다. 영도 특유의 미스터리하고 몽환적인 안개(해무)와 근대 조선업 역사가 깃든 공업적 질감을 배경으로 활용하여, 참가자가 실제 탐정이 되어 도시 구석구석의 퀴즈를 해결하는 증강현실(AR) 모바일 RPG 카트 투어 게임입니다.",
                 programs: [
-                    "<strong>부기(Boogi) 안심 인증 뱃지제 도입:</strong> 가격을 정찰제로 선제 공개하고 위생수칙을 준수하는 점포에 부산 마스코트 부기 뱃지 수여 및 구글맵 표기 연동",
-                    "<strong>전통시장 통합 다국어 모바일 오더 앱:</strong> 외국인이 현금 없이도 스마트폰으로 바로 가격을 확인하고 선결제한 후 음식을 픽업할 수 있는 결제망 구축",
-                    "<strong>로컬 음식 투어리스트 패스트트랙 운영:</strong> 국밥, 명란김밥, 부산 밀면 등 대표 시장 음식점의 예약 번거로움을 해결해 줄 수 있는 외국인 전용 하이패스 예약 바우처 도입"
+                    "<strong>AR 기반 '깡깡이 미스터리 코드' 모바일 게임 투어:</strong> 스마트폰 앱을 켜고 실제 깡깡이마을 골목길의 조선소 흔적, 낡은 선박 장치 부속을 스캔하여 숨겨진 미스터리 보물 지도 퍼즐을 해결하는 어드벤처",
+                    "<strong>해무 테마 깡깡이 레트로 카트 드라이빙:</strong> 영도 해안가를 따라 빈티지하게 개조된 소형 친환경 전기 전동 카트를 직접 타고, 사운드 도슨트 가이드를 헤드폰으로 들으며 영도의 역사적 골목을 탐험",
+                    "<strong>영도 시크릿 해안 야외 클럽하우스 네트워킹:</strong> 미스터리 미션을 무사히 클리어한 참가자들에게 한정판 영도 깡깡이 에코백 굿즈와 로컬 해녀촌 해산물 핑거푸드 시식 제공"
                 ],
-                effect_1: "신뢰 마케팅 성공: 국내외 물가 불신 트렌드를 이겨내는 '정직하고 정겨운 시장도시' 신뢰 회복",
-                effect_2: "결제 인프라 현대화: 카드 가맹 기피 현상을 근절하고 결제 데이터화를 통한 상인 세무 투명성 및 마케팅 효율 확보",
-                effect_3: "지속적 재방문 유도: 외국인들의 리뷰 활성화를 유도해 구글 평점 상위에 부산 맛집이 연속 랭크되는 글로벌 오가닉 홍보 효과",
-                color: "amber"
+                effect_1: "완전히 새로운 몰입형 경험: 단순 눈요기용 관광지에서 게이미피케이션(Gamification)을 접목한 '온몸으로 플레이하는 도시 영도'로 전환",
+                effect_2: "구도심 유휴 공간의 재탄생: 어둡고 노후화된 공업지대 골목을 MZ세대가 가장 열광하는 레트로하고 신비로운 탐험 무대로 재해석",
+                effect_3: "재방문 욕구 자극: 고유의 판타지 스토리텔링 라인을 주입하여 매 시즌 시나리오 업데이트를 통한 지속적 팬덤 유도 및 매니아 소비 유입",
+                color: "indigo"
             }
         };
 
