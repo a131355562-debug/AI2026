@@ -34,6 +34,15 @@
 
     <!-- 상단 히어로 영역 -->
     <header class="relative overflow-hidden bg-gradient-to-br from-[#E2EAF4] via-[#F1F5F9] to-[#F8F9FA] border-b border-slate-200 py-16 px-4 md:px-8 text-center">
+        
+        <!-- 홈 버튼 배치 (헤더 내부 absolute 배치로 레이아웃 충돌 방지) -->
+        <div class="absolute top-4 right-4 z-50">
+            <a href="../index.html" class="flex items-center space-x-1.5 bg-white/70 backdrop-blur-md px-3 py-1.5 rounded-full border border-slate-200 shadow-sm hover:bg-white transition text-slate-600 hover:text-slate-900">
+                <i data-lucide="home" class="w-3.5 h-3.5"></i>
+                <span class="text-[11px] font-bold uppercase tracking-wider">Home</span>
+            </a>
+        </div>
+
         <div class="max-w-4xl mx-auto relative z-10">
             <span class="inline-block px-4 py-1.5 mb-4 text-xs font-semibold tracking-wider text-slate-600 bg-white/80 rounded-full shadow-sm uppercase">
                 데이터 분석 기반 관광 정책 & 기획 프로젝트
@@ -562,7 +571,7 @@
                     "<strong>빙판길 제로 주말 로드 트립 패키지:</strong> 윈터 액티비티 바우처 및 스포츠 선글라스 굿즈, 주요 바닷가 뷰 숙박 1박을 결합한 주말 집중 웰니스 익스프레스 티켓 판매"
                 ],
                 effect_1: "비수기 겨울 시즌 타개: 다른 지역은 엄두도 못 내는 겨울 아웃도어 액티비티를 부산의 독보적 날씨 경쟁력으로 무장하여 단기 여행 패키지 판매 극대화",
-                effect_2: "2030 웰니스 라이프스타일 흡수: 건강한 스포츠 라이프와 힙한 파티 문화를 함께 소비하는 현대 젊은이들의 취향을 완벽히 관통",
+                effect_2: "2030 웰니스 라이스스타일 흡수: 건강한 스포츠 라이프와 힙한 파티 문화를 함께 소비하는 현대 젊은이들의 취향을 완벽히 관통",
                 effect_3: "관광 경제 집중도 분산: 센텀과 광안리 일대 도로 통제 및 제휴를 통해 내외국인 청년들이 안전하게 머물고 어울리는 주말 경제 창출",
                 color: "sky"
             },
