@@ -391,12 +391,37 @@
                 `
             },
             { 
-                id: 10, 
-                title: "파이널 포트폴리오", 
-                tools: ["HTML5", "Tailwind"], 
+                id: 8, 
+                title: "코랩을 활용한 데이터 분석 3", 
+                tools: ["YouTube API", "NLP", "Topic Modeling"], 
+                link: "./08/index.html",
                 color: "#F43F5E", 
-                summary: "모든 과업을 집대성한 웹 포트폴리오.", 
-                detail: "학습한 모든 AI 기술을 활용하여 자신만의 정체성을 담은 결과물을 구축했습니다." 
+                summary: "유튜브 영상 및 유저 댓글 데이터를 이용한 부산 관광 여론 분석 및 전략 제안.", 
+                detail: `
+                    <div class='space-y-6'>
+                        <p class='text-sm opacity-90 leading-relaxed italic border-l-4 border-rose-500 pl-4 py-1 mb-4 text-rose-500/90'>
+                            "미디어 데이터와 시민들의 진짜 목소리를 분석해 부산 관광의 청사진을 그립니다."
+                        </p>
+                        <section>
+                            <h5 class='text-lg font-bold mb-2 text-rose-400'>유튜브 영상 및 댓글 데이터 정성 분석</h5>
+                            <p class='text-sm opacity-80'>
+                                유튜브에 업로드된 다양한 부산 관광 관련 비디오 콘텐츠의 맥락과 실시간으로 생성되는 시청자 유저 댓글 빅데이터를 수집 및 분석하였습니다.
+                            </p>
+                        </section>
+                        <section>
+                            <h5 class='text-lg font-bold mb-2 text-rose-400'>관광 여론 분석 및 전략적 통찰</h5>
+                            <ul class='list-disc pl-5 text-sm opacity-80 space-y-2'>
+                                <li><strong>성장 요인 도출:</strong> 소셜 미디어상의 바이럴 및 글로벌 관심도 트렌드 연계 성장성 파악.</li>
+                                <li><strong>시민/관광객 반응 파악:</strong> 풍부한 로컬 콘텐츠에 대한 자발적 긍정 평가 및 호감도 정성 분석.</li>
+                                <li><strong>주요 문제점 진단:</strong> 특정 관광 집중지의 트래픽 과밀, 교통 편의성 미비 등 숨겨진 불편 사항 진단.</li>
+                                <li><strong>개선 방향 및 전략 수립:</strong> 로컬 콘텐츠 연계형 코스 다각화와 친화적 디지털 인프라 제안을 포함한 데이터 기반 맞춤 솔루션 수립.</li>
+                            </ul>
+                        </section>
+                        <div class="pt-6">
+                            <a href="./08/index.html" class="inline-block px-8 py-3 rounded-xl bg-rose-500 text-white font-bold hover:bg-rose-600 transition-all shadow-lg shadow-rose-500/30 transform hover:-translate-y-1">결과물 보기</a>
+                        </div>
+                    </div>
+                `
             }
         ];
 
@@ -421,7 +446,9 @@
                     <div class="text-xs font-semibold opacity-70 group-hover:opacity-100 transition-opacity" style="color: ${p.color}">VIEW DETAILS</div>
                     
                     ${!p.hidePlus ? `
-                        <div class="w-10 h-10 rounded-full border border-current flex items-center justify-center opacity-40 group-hover:opacity-100 transition-all hover:bg-current hover:text-white" style="color: ${p.color}">
+                        <div class="w-10 h-10 rounded-full border border-current flex items-center justify-center opacity-40 group-hover:opacity-100 transition-all hover:bg-current hover:text-white" 
+                             style="color: ${p.color}"
+                             onclick="event.stopPropagation(); if('${p.link}') window.location.href='${p.link}';">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"/>
                             </svg>
